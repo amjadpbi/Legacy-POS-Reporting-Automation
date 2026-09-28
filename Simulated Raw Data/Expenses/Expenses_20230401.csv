@@ -1,0 +1,26 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202304-001,Raw Materials,1110.66,04/23/2023,Dairy Distributor,Ingredients - April 2023
+EXP-202304-002,Ingredients,1097.25,04/14/2023,Dairy Distributor,Ingredients - April 2023
+EXP-202304-003,Ingredient Costs,1140.17,04/05/2023,Flour Suppliers Inc,Ingredients - April 2023
+EXP-202304-004,Ingredients,1047.85,04/01/2023,Bulk Foods Ltd,Ingredients - April 2023
+EXP-202304-005,Ingredient Costs,1507.76,04/13/2023,Sugar & Spice Co,Ingredients - April 2023
+EXP-202304-006,Ingredient Costs,1100.13,04/23/2023,Bulk Foods Ltd,Ingredients - April 2023
+EXP-202304-007,Ingredient Costs,1272.88,04/12/2023,Flour Suppliers Inc,Ingredients - April 2023
+EXP-202304-008,Ingredients,1506.1,04/06/2023,Bulk Foods Ltd,Ingredients - April 2023
+EXP-202304-009,Ingredients,1476.91,04/04/2023,Dairy Distributor,Ingredients - April 2023
+EXP-202304-010,Ingredient Costs,1047.85,04/11/2023,Flour Suppliers Inc,Ingredients - April 2023
+EXP-202304-011,Ingredient Costs,1502.68,04/23/2023,Flour Suppliers Inc,Ingredients - April 2023
+EXP-202304-012,Ingredient Costs,1435.04,04/04/2023,Flour Suppliers Inc,Ingredients - April 2023
+EXP-202304-013,Ingredient Costs,1353.79,04/21/2023,Bulk Foods Ltd,Ingredients - April 2023
+EXP-202304-014,Payroll,4826.13,04/06/2023,Payroll,Labor - April 2023
+EXP-202304-015,Payroll,4863.02,04/10/2023,Payroll,Labor - April 2023
+EXP-202304-016,Staff Costs,4153.88,04/18/2023,Payroll,Labor - April 2023
+EXP-202304-017,Utilities,5000.0,04/02/2023,Utility Company,Rent & Utilities - April 2023
+EXP-202304-018,Marketing & Advertising,645.99,04/02/2023,Print Media Inc,Marketing - April 2023
+EXP-202304-019,Marketing,616.09,04/03/2023,Print Media Inc,Marketing - April 2023
+EXP-202304-020,Marketing & Advertising,448.89,04/13/2023,Social Media Agency,Marketing - April 2023
+EXP-202304-021,Equipment,552.1,04/09/2023,Equipment Supplier,Equipment - April 2023
+EXP-202304-022,Packaging,663.95,04/17/2023,Packaging Co,Packaging - April 2023
+EXP-202304-023,Other,426.5,04/11/2023,Various,Other - April 2023
+EXP-202304-024,Other,416.11,04/01/2023,Various,Other - April 2023
+EXP-202304-025,Other,445.78,04/04/2023,Various,Other - April 2023

@@ -1,0 +1,178 @@
+{
+  "version": "1.1.0",
+  "diagrams": [
+    {
+      "ordinal": 0,
+      "scrollPosition": {
+        "x": 1371.527796943227,
+        "y": 94.806068913126282
+      },
+      "nodes": [
+        {
+          "location": {
+            "x": 2033.5831720374526,
+            "y": 0
+          },
+          "nodeIndex": "DimDate",
+          "nodeLineageTag": "5998267a-9b6f-4768-9003-cd7515013541",
+          "size": {
+            "height": 145,
+            "width": 234
+          },
+          "zIndex": 9
+        },
+        {
+          "location": {
+            "x": 1412.6104268055819,
+            "y": 159.59021600376266
+          },
+          "nodeIndex": "DimCustomer",
+          "nodeLineageTag": "86e05e39-dbb0-4502-87b9-4d1adbd76627",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 3
+        },
+        {
+          "location": {
+            "x": 1649.2073923490188,
+            "y": 573.57671692441431
+          },
+          "nodeIndex": "DimLocation",
+          "nodeLineageTag": "b694c1a7-ed31-4355-a0ca-3efdcc9bac06",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 10
+        },
+        {
+          "location": {
+            "x": 2326.6525783384932,
+            "y": 515.48902963445437
+          },
+          "nodeIndex": "DimPaymentMethod",
+          "nodeLineageTag": "398a0994-c747-4c4c-9d71-6c4856bb4edc",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 4
+        },
+        {
+          "location": {
+            "x": 1962.81110743213,
+            "y": 521.212468685226
+          },
+          "nodeIndex": "DimProduct",
+          "nodeLineageTag": "059b31aa-5f4b-493f-9cc4-873a0fe9bbfe",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 5
+        },
+        {
+          "location": {
+            "x": 1720.304937884757,
+            "y": 153.26981140955425
+          },
+          "nodeIndex": "FactSalesHeader",
+          "nodeLineageTag": "e3762359-3cc4-4bbc-a228-39e1d108c1c5",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 6
+        },
+        {
+          "location": {
+            "x": 2012.2054436275184,
+            "y": 154.8499125581063
+          },
+          "nodeIndex": "FactSalesLine",
+          "nodeLineageTag": "ca52f063-8d8d-40a2-b96a-d93c7ca3a6c8",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 12
+        },
+        {
+          "location": {
+            "x": 2913.6067859720119,
+            "y": 191.86677695299113
+          },
+          "nodeIndex": "DimExpCategory",
+          "nodeLineageTag": "7ef431ee-8179-4707-9884-2d6aff501d8f",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 7
+        },
+        {
+          "location": {
+            "x": 2289.048625554552,
+            "y": 148.52950796389788
+          },
+          "nodeIndex": "FactPayment",
+          "nodeLineageTag": "f6ce1901-1571-47a9-86f7-31bc64e4b798",
+          "size": {
+            "height": 300,
+            "width": 234
+          },
+          "zIndex": 11
+        },
+        {
+          "location": {
+            "x": 2549.858040874612,
+            "y": 146.94940681534584
+          },
+          "nodeIndex": "FactExpense",
+          "nodeLineageTag": "ebaa2114-8053-44a1-b670-22dffed2f91b",
+          "size": {
+            "height": 248,
+            "width": 234
+          },
+          "zIndex": 8
+        },
+        {
+          "location": {
+            "x": 3036.4364688196965,
+            "y": 437.53371933546879
+          },
+          "nodeIndex": "_Measures",
+          "nodeLineageTag": "5825a39d-cc4f-4d09-b2dd-2581551019cd",
+          "size": {
+            "height": 104,
+            "width": 234
+          },
+          "zIndex": 2
+        },
+        {
+          "location": {
+            "x": 2701.0368185872712,
+            "y": 451.908928485902
+          },
+          "nodeIndex": "Payment Aging Categories",
+          "nodeLineageTag": "7aa266c6-fa86-45d6-be9f-8ae8827cf052",
+          "size": {
+            "height": 200,
+            "width": 234
+          },
+          "zIndex": 1
+        }
+      ],
+      "name": "All tables",
+      "zoomValue": 63.287087723234094,
+      "pinKeyFieldsToTop": false,
+      "showExtraHeaderInfo": false,
+      "hideKeyFieldsWhenCollapsed": false,
+      "tablesLocked": false
+    }
+  ],
+  "selectedDiagram": "All tables",
+  "defaultDiagram": "All tables"
+}

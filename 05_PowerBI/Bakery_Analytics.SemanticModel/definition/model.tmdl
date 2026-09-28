@@ -1,0 +1,67 @@
+model Model
+	culture: en-US
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-PK
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 01_Parameters
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup '08_Dimension Tables'
+
+	annotation PBI_QueryGroupOrder = 8
+
+queryGroup 02_Functions
+
+	annotation PBI_QueryGroupOrder = 2
+
+queryGroup '03_Staging - Sales'
+
+	annotation PBI_QueryGroupOrder = 3
+
+queryGroup '04_Staging - Payments'
+
+	annotation PBI_QueryGroupOrder = 4
+
+queryGroup '05_Staging - Products'
+
+	annotation PBI_QueryGroupOrder = 5
+
+queryGroup '06_Staging - Customers'
+
+	annotation PBI_QueryGroupOrder = 6
+
+queryGroup '07_Staging - Expenses'
+
+	annotation PBI_QueryGroupOrder = 7
+
+queryGroup '9_Fact Tables'
+
+	annotation PBI_QueryGroupOrder = 9
+
+annotation __PBI_TimeIntelligenceEnabled = 0
+
+annotation PBI_QueryOrder = ["pDataFolderPath","DimCustomer","DimProduct","DimDate","fnclean_sales","stgSales_Combined","stgProduct_Combined","stgCustomer_Combined","DimPaymentMethod","DimLocation","FactSalesHeader","FactSalesLine","stgExpenses","DimExpCategory","stgPayments_Combined","FactPayment","FactExpense","_Measures"]
+
+annotation __TEdtr = 1
+
+annotation PBI_ProTooling = ["TMDLView_Desktop","DevMode"]
+
+ref table DimDate
+ref table FactSalesHeader
+ref table FactSalesLine
+ref table DimCustomer
+ref table DimProduct
+ref table DimPaymentMethod
+ref table DimLocation
+ref table DimExpCategory
+ref table FactPayment
+ref table FactExpense
+ref table _Measures
+ref table 'Payment Aging Categories'
+
+ref cultureInfo en-US
+

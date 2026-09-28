@@ -1,0 +1,28 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202406-001,Raw Materials,1459.11,06/12/2024,Bulk Foods Ltd,Ingredients - June 2024
+EXP-202406-002,Ingredient Costs,1276.28,06/18/2024,Flour Suppliers Inc,Ingredients - June 2024
+EXP-202406-003,Ingredients,1176.09,06/14/2024,Bulk Foods Ltd,Ingredients - June 2024
+EXP-202406-004,Ingredients,1621.34,06/02/2024,Bulk Foods Ltd,Ingredients - June 2024
+EXP-202406-005,Raw Materials,1412.16,06/11/2024,Sugar & Spice Co,Ingredients - June 2024
+EXP-202406-006,Ingredient Costs,1379.06,06/23/2024,Sugar & Spice Co,Ingredients - June 2024
+EXP-202406-007,Raw Materials,1128.85,06/24/2024,Dairy Distributor,Ingredients - June 2024
+EXP-202406-008,Ingredient Costs,1593.46,06/12/2024,Sugar & Spice Co,Ingredients - June 2024
+EXP-202406-009,Raw Materials,1205.36,06/03/2024,Sugar & Spice Co,Ingredients - June 2024
+EXP-202406-010,Ingredients,1322.05,06/06/2024,Flour Suppliers Inc,Ingredients - June 2024
+EXP-202406-011,Ingredients,1377.62,06/08/2024,Sugar & Spice Co,Ingredients - June 2024
+EXP-202406-012,Raw Materials,1224.93,06/05/2024,Bulk Foods Ltd,Ingredients - June 2024
+EXP-202406-013,Raw Materials,1545.68,06/11/2024,Dairy Distributor,Ingredients - June 2024
+EXP-202406-014,Staff Costs,4734.26,06/22/2024,Payroll,Labor - June 2024
+EXP-202406-015,Payroll,4637.62,06/11/2024,Payroll,Labor - June 2024
+EXP-202406-016,Payroll,4716.55,06/18/2024,Payroll,Labor - June 2024
+EXP-202406-017,Rent & Utilities,5000.0,06/02/2024,Property Management,Rent & Utilities - June 2024
+EXP-202406-018,Marketing,498.17,06/06/2024,Social Media Agency,Marketing - June 2024
+EXP-202406-019,Marketing,487.76,06/25/2024,Print Media Inc,Marketing - June 2024
+EXP-202406-020,Marketing & Advertising,438.71,06/13/2024,Print Media Inc,Marketing - June 2024
+EXP-202406-021,Marketing,512.55,06/14/2024,Print Media Inc,Marketing - June 2024
+EXP-202406-022,Equipment,621.79,06/11/2024,Equipment Supplier,Equipment - June 2024
+EXP-202406-023,Packaging,345.13,06/13/2024,Packaging Co,Packaging - June 2024
+EXP-202406-024,Packaging,316.84,06/17/2024,Packaging Co,Packaging - June 2024
+EXP-202406-025,Other,467.85,06/04/2024,Various,Other - June 2024
+EXP-202406-026,Other,320.29,06/14/2024,Various,Other - June 2024
+EXP-202406-027,Other,398.05,06/01/2024,Various,Other - June 2024

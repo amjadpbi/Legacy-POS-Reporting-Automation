@@ -1,0 +1,102 @@
+table DimCustomer
+	lineageTag: 86e05e39-dbb0-4502-87b9-4d1adbd76627
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 24c89f25-46cc-4f08-822d-68269c5ee888
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerID
+		dataType: string
+		lineageTag: b001cbe0-1286-4c27-af3b-04aff173f1ba
+		summarizeBy: none
+		sourceColumn: CustomerID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerName
+		dataType: string
+		isHidden
+		lineageTag: f37f5e60-66b5-4ac5-a624-1f5ea2614299
+		summarizeBy: none
+		sourceColumn: CustomerName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerType
+		dataType: string
+		lineageTag: 591e007b-54e9-44d2-8e1d-4ecd19a7b4d6
+		summarizeBy: none
+		sourceColumn: CustomerType
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Email
+		dataType: string
+		lineageTag: afcda774-8d32-4834-b3c3-2430a5b896fa
+		summarizeBy: none
+		sourceColumn: Email
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Phone
+		dataType: string
+		lineageTag: 26163722-3c12-48bc-9855-b596f44efa3b
+		summarizeBy: none
+		sourceColumn: Phone
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column RegistrationDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: d048a8a0-b344-4867-9de7-8b14c8cccfe7
+		summarizeBy: none
+		sourceColumn: RegistrationDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsActive
+		dataType: string
+		lineageTag: 8188e5af-98e7-440d-9fef-e139d9298f92
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimCustomer = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source =
+				let
+				    Source = stgCustomer_Combined
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

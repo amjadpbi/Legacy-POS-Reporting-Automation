@@ -1,0 +1,30 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202307-001,Ingredients,1232.01,07/07/2023,Flour Suppliers Inc,Ingredients - July 2023
+EXP-202307-002,Ingredient Costs,1206.42,07/13/2023,Dairy Distributor,Ingredients - July 2023
+EXP-202307-003,Ingredients,1012.14,07/19/2023,Dairy Distributor,Ingredients - July 2023
+EXP-202307-004,Raw Materials,1255.1,07/13/2023,Flour Suppliers Inc,Ingredients - July 2023
+EXP-202307-005,Ingredients,992.21,07/26/2023,Sugar & Spice Co,Ingredients - July 2023
+EXP-202307-006,Ingredients,1197.28,07/17/2023,Sugar & Spice Co,Ingredients - July 2023
+EXP-202307-007,Ingredient Costs,1024.05,07/15/2023,Bulk Foods Ltd,Ingredients - July 2023
+EXP-202307-008,Ingredient Costs,1008.55,07/10/2023,Sugar & Spice Co,Ingredients - July 2023
+EXP-202307-009,Ingredients,1117.13,07/22/2023,Sugar & Spice Co,Ingredients - July 2023
+EXP-202307-010,Ingredient Costs,1108.62,07/15/2023,Bulk Foods Ltd,Ingredients - July 2023
+EXP-202307-011,Ingredient Costs,927.04,07/25/2023,Bulk Foods Ltd,Ingredients - July 2023
+EXP-202307-012,Raw Materials,1152.56,07/14/2023,Bulk Foods Ltd,Ingredients - July 2023
+EXP-202307-013,Ingredient Costs,910.55,07/11/2023,Flour Suppliers Inc,Ingredients - July 2023
+EXP-202307-014,Raw Materials,1207.95,07/17/2023,Flour Suppliers Inc,Ingredients - July 2023
+EXP-202307-015,Ingredients,1057.42,07/16/2023,Sugar & Spice Co,Ingredients - July 2023
+EXP-202307-016,Ingredients,1054.43,07/03/2023,Dairy Distributor,Ingredients - July 2023
+EXP-202307-017,Labor,3456.25,07/23/2023,Payroll,Labor - July 2023
+EXP-202307-018,Staff Costs,3321.36,07/07/2023,Payroll,Labor - July 2023
+EXP-202307-019,Staff Costs,3250.99,07/18/2023,Payroll,Labor - July 2023
+EXP-202307-020,Staff Costs,3662.76,07/21/2023,Payroll,Labor - July 2023
+EXP-202307-021,Utilities,5000.0,07/02/2023,Utility Company,Rent & Utilities - July 2023
+EXP-202307-022,Utilities,2500.0,07/16/2023,Utility Company,Rent & Utilities - July 2023
+EXP-202307-023,Marketing,896.51,07/12/2023,Social Media Agency,Marketing - July 2023
+EXP-202307-024,Marketing,813.84,07/04/2023,Digital Ads Co,Marketing - July 2023
+EXP-202307-025,Equipment,637.89,07/26/2023,Equipment Supplier,Equipment - July 2023
+EXP-202307-026,Packaging,218.05,07/26/2023,Packaging Co,Packaging - July 2023
+EXP-202307-027,Packaging,210.29,07/08/2023,Packaging Co,Packaging - July 2023
+EXP-202307-028,Packaging,161.38,07/09/2023,Packaging Co,Packaging - July 2023
+EXP-202307-029,Other,1119.95,07/21/2023,Various,Other - July 2023

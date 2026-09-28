@@ -1,0 +1,278 @@
+table DimDate
+	lineageTag: 5998267a-9b6f-4768-9003-cd7515013541
+	dataCategory: Time
+
+	column Date
+		dataType: dateTime
+		isKey
+		formatString: Long Date
+		lineageTag: a58a909c-64a7-4a7e-9fe3-bd137509dd63
+		summarizeBy: none
+		sourceColumn: Date
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 2d84ffe5-f654-4f72-9d9b-8d630097b361
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Year
+		dataType: int64
+		formatString: 0
+		lineageTag: 1ec590db-889c-4583-b376-292ffd04036a
+		summarizeBy: sum
+		sourceColumn: Year
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Quarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 60c7fbc4-d938-44a1-975e-2402925de2f8
+		summarizeBy: sum
+		sourceColumn: Quarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Month
+		dataType: int64
+		formatString: 0
+		lineageTag: 57218067-9f41-4ec9-9586-682fa7048576
+		summarizeBy: sum
+		sourceColumn: Month
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Week
+		dataType: int64
+		formatString: 0
+		lineageTag: a55d529f-3224-4dca-b53c-59079b6f965e
+		summarizeBy: sum
+		sourceColumn: Week
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthName
+		dataType: string
+		lineageTag: 607ef1f3-cbca-437c-a73b-53cfe7b67f90
+		summarizeBy: none
+		sourceColumn: MonthName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column MonthShort
+		dataType: string
+		lineageTag: 4377bc8b-3a82-4eb7-9a64-db72a9f8e850
+		summarizeBy: none
+		sourceColumn: MonthShort
+		sortByColumn: Month
+
+		changedProperty = IsHidden
+
+		changedProperty = SortByColumn
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayName
+		dataType: string
+		lineageTag: b0c9ed23-949e-46cf-863c-f4280e3836e1
+		summarizeBy: none
+		sourceColumn: DayName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayShort
+		dataType: string
+		lineageTag: 5d8c7c82-3416-4013-b140-56d21aec3d29
+		summarizeBy: none
+		sourceColumn: DayShort
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfWeek
+		dataType: int64
+		formatString: 0
+		lineageTag: a30a50fb-feb7-40e2-be29-9683f2afab6d
+		summarizeBy: sum
+		sourceColumn: DayOfWeek
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfMonth
+		dataType: int64
+		formatString: 0
+		lineageTag: 829e304a-ff0d-49fd-938a-8896cc6c2988
+		summarizeBy: sum
+		sourceColumn: DayOfMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DayOfYear
+		dataType: int64
+		formatString: 0
+		lineageTag: e6798db8-2110-47df-8db9-240cf25364b1
+		summarizeBy: sum
+		sourceColumn: DayOfYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column IsWeekend
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 236a2c52-90e1-4d16-945c-3fd214632c6f
+		summarizeBy: none
+		sourceColumn: IsWeekend
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalYear
+		dataType: int64
+		formatString: 0
+		lineageTag: effc6f10-36d6-449b-bedc-7504542d3dfa
+		summarizeBy: sum
+		sourceColumn: FiscalYear
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FiscalQuarter
+		dataType: int64
+		formatString: 0
+		lineageTag: 896941fb-1d27-4537-af75-73c1864a3d79
+		summarizeBy: sum
+		sourceColumn: FiscalQuarter
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonth
+		dataType: string
+		lineageTag: 3510f0bf-49ca-4163-9107-a74279940837
+		summarizeBy: none
+		sourceColumn: YearMonth
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column YearMonthNum
+		dataType: int64
+		formatString: 0
+		lineageTag: ca994918-26ab-4783-aec0-64a8d3e8e666
+		summarizeBy: sum
+		sourceColumn: YearMonthNum
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimDate = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source = ```
+				let
+				    Source = let
+				    // Define date range
+				    StartDate = #date(2022, 1, 1),
+				    EndDate = #date(2024, 12, 31),
+				    
+				    // Calculate number of days
+				    DayCount = Duration.Days(EndDate - StartDate) + 1,
+				    
+				    // Generate list of dates
+				    DateList = List.Dates(StartDate, DayCount, #duration(1,0,0,0)),
+				    
+				    // Convert to table
+				    TableFromList = Table.FromList(DateList, Splitter.SplitByNothing()),
+				    RenamedColumns = Table.RenameColumns(TableFromList,{{"Column1", "Date"}}),
+				    ChangedType = Table.TransformColumnTypes(RenamedColumns,{{"Date", type date}}),
+				    
+				    // Add DateKey
+				    AddDateKey = Table.AddColumn(ChangedType, "DateKey", each 
+				        Date.Year([Date]) * 10000 + Date.Month([Date]) * 100 + Date.Day([Date]), 
+				        Int64.Type),
+				    
+				    // Add Year, Quarter, Month
+				    AddYear = Table.AddColumn(AddDateKey, "Year", each Date.Year([Date]), Int64.Type),
+				    AddQuarter = Table.AddColumn(AddYear, "Quarter", each Date.QuarterOfYear([Date]), Int64.Type),
+				    AddMonth = Table.AddColumn(AddQuarter, "Month", each Date.Month([Date]), Int64.Type),
+				    AddWeek = Table.AddColumn(AddMonth, "Week", each Date.WeekOfYear([Date]), Int64.Type),
+				    
+				    // Add Month and Day Names
+				    AddMonthName = Table.AddColumn(AddWeek, "MonthName", each Date.MonthName([Date]), type text),
+				    AddMonthShort = Table.AddColumn(AddMonthName, "MonthShort", each Text.Start([MonthName], 3), type text),
+				    AddDayName = Table.AddColumn(AddMonthShort, "DayName", each Date.DayOfWeekName([Date]), type text),
+				    AddDayShort = Table.AddColumn(AddDayName, "DayShort", each Text.Start([DayName], 3), type text),
+				    
+				    // Add Day Numbers
+				    AddDayOfWeek = Table.AddColumn(AddDayShort, "DayOfWeek", each 
+				        Date.DayOfWeek([Date], Day.Monday) + 1, Int64.Type),
+				    AddDayOfMonth = Table.AddColumn(AddDayOfWeek, "DayOfMonth", each Date.Day([Date]), Int64.Type),
+				    AddDayOfYear = Table.AddColumn(AddDayOfMonth, "DayOfYear", each Date.DayOfYear([Date]), Int64.Type),
+				    
+				    // Add IsWeekend
+				    AddIsWeekend = Table.AddColumn(AddDayOfYear, "IsWeekend", each 
+				        [DayOfWeek] >= 6, type logical),
+				    
+				    // Add Fiscal Year (starts July 1)
+				    AddFiscalYear = Table.AddColumn(AddIsWeekend, "FiscalYear", each 
+				        if [Month] >= 7 then [Year] + 1 else [Year], Int64.Type),
+				    
+				    AddFiscalQuarter = Table.AddColumn(AddFiscalYear, "FiscalQuarter", each 
+				        if [Month] >= 7 and [Month] <= 9 then 1
+				        else if [Month] >= 10 and [Month] <= 12 then 2
+				        else if [Month] >= 1 and [Month] <= 3 then 3
+				        else 4, Int64.Type),
+				    
+				    // Add YearMonth for sorting
+				    AddYearMonth = Table.AddColumn(AddFiscalQuarter, "YearMonth", each 
+				        Text.From([Year]) & "-" & Text.PadStart(Text.From([Month]), 2, "0"), type text),
+				    
+				    AddYearMonthNum = Table.AddColumn(AddYearMonth, "YearMonthNum", each 
+				        [Year] * 100 + [Month], Int64.Type)
+				in
+				    AddYearMonthNum
+				in
+				    Source
+				```
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

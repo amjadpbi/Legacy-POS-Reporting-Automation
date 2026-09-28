@@ -1,0 +1,28 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202302-001,Ingredients,1365.68,02/23/2023,Flour Suppliers Inc,Ingredients - February 2023
+EXP-202302-002,Ingredient Costs,1284.6,02/10/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-003,Ingredients,1189.09,02/06/2023,Dairy Distributor,Ingredients - February 2023
+EXP-202302-004,Ingredients,1346.41,02/23/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-005,Ingredient Costs,1416.02,02/13/2023,Dairy Distributor,Ingredients - February 2023
+EXP-202302-006,Ingredient Costs,1250.41,02/04/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-007,Ingredients,1286.69,02/15/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-008,Ingredient Costs,1115.63,02/15/2023,Bulk Foods Ltd,Ingredients - February 2023
+EXP-202302-009,Ingredient Costs,1225.09,02/19/2023,Dairy Distributor,Ingredients - February 2023
+EXP-202302-010,Ingredient Costs,1253.57,02/22/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-011,Ingredient Costs,1253.24,02/26/2023,Flour Suppliers Inc,Ingredients - February 2023
+EXP-202302-012,Ingredients,1070.73,02/05/2023,Dairy Distributor,Ingredients - February 2023
+EXP-202302-013,Ingredients,1388.65,02/05/2023,Sugar & Spice Co,Ingredients - February 2023
+EXP-202302-014,Labor,4348.96,02/16/2023,Payroll,Labor - February 2023
+EXP-202302-015,Staff Costs,4665.3,02/15/2023,Payroll,Labor - February 2023
+EXP-202302-016,Payroll,4487.79,02/17/2023,Payroll,Labor - February 2023
+EXP-202302-017,Rent & Utilities,5000.0,02/02/2023,Property Management,Rent & Utilities - February 2023
+EXP-202302-018,Utilities,2500.0,02/16/2023,Utility Company,Rent & Utilities - February 2023
+EXP-202302-019,Marketing & Advertising,978.9,02/13/2023,Social Media Agency,Marketing - February 2023
+EXP-202302-020,Marketing & Advertising,706.45,02/13/2023,Digital Ads Co,Marketing - February 2023
+EXP-202302-021,Equipment,221.13,02/07/2023,Equipment Supplier,Equipment - February 2023
+EXP-202302-022,Equipment,190.89,02/10/2023,Equipment Supplier,Equipment - February 2023
+EXP-202302-023,Equipment,156.85,02/13/2023,Equipment Supplier,Equipment - February 2023
+EXP-202302-024,Packaging,293.63,02/21/2023,Packaging Co,Packaging - February 2023
+EXP-202302-025,Packaging,231.88,02/21/2023,Packaging Co,Packaging - February 2023
+EXP-202302-026,Other,563.95,02/10/2023,Various,Other - February 2023
+EXP-202302-027,Other,615.45,02/01/2023,Various,Other - February 2023

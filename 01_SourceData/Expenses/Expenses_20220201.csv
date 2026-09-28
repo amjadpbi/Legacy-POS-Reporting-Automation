@@ -1,0 +1,26 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202202-001,Ingredient Costs,926.01,02/21/2022,Sugar & Spice Co,Ingredients - February 2022
+EXP-202202-002,Ingredient Costs,865.57,02/04/2022,Bulk Foods Ltd,Ingredients - February 2022
+EXP-202202-003,Ingredient Costs,1047.51,02/17/2022,Sugar & Spice Co,Ingredients - February 2022
+EXP-202202-004,Ingredients,857.52,02/21/2022,Sugar & Spice Co,Ingredients - February 2022
+EXP-202202-005,Raw Materials,1084.79,02/07/2022,Sugar & Spice Co,Ingredients - February 2022
+EXP-202202-006,Ingredients,850.14,02/12/2022,Dairy Distributor,Ingredients - February 2022
+EXP-202202-007,Raw Materials,1018.77,02/20/2022,Flour Suppliers Inc,Ingredients - February 2022
+EXP-202202-008,Raw Materials,937.34,02/17/2022,Dairy Distributor,Ingredients - February 2022
+EXP-202202-009,Raw Materials,974.15,02/12/2022,Bulk Foods Ltd,Ingredients - February 2022
+EXP-202202-010,Raw Materials,1081.36,02/14/2022,Sugar & Spice Co,Ingredients - February 2022
+EXP-202202-011,Raw Materials,1132.8,02/06/2022,Flour Suppliers Inc,Ingredients - February 2022
+EXP-202202-012,Ingredients,972.11,02/01/2022,Bulk Foods Ltd,Ingredients - February 2022
+EXP-202202-013,Ingredient Costs,985.53,02/14/2022,Flour Suppliers Inc,Ingredients - February 2022
+EXP-202202-014,Raw Materials,1120.35,02/21/2022,Flour Suppliers Inc,Ingredients - February 2022
+EXP-202202-015,Ingredients,981.69,02/08/2022,Flour Suppliers Inc,Ingredients - February 2022
+EXP-202202-016,Staff Costs,4187.61,02/06/2022,Payroll,Labor - February 2022
+EXP-202202-017,Payroll,4383.93,02/13/2022,Payroll,Labor - February 2022
+EXP-202202-018,Staff Costs,4028.86,02/24/2022,Payroll,Labor - February 2022
+EXP-202202-019,Rent & Utilities,5000.0,02/02/2022,Property Management,Rent & Utilities - February 2022
+EXP-202202-020,Marketing,707.88,02/16/2022,Digital Ads Co,Marketing - February 2022
+EXP-202202-021,Marketing,793.29,02/05/2022,Digital Ads Co,Marketing - February 2022
+EXP-202202-022,Equipment,568.52,02/12/2022,Equipment Supplier,Equipment - February 2022
+EXP-202202-023,Packaging,483.58,02/01/2022,Packaging Co,Packaging - February 2022
+EXP-202202-024,Other,547.65,02/07/2022,Various,Other - February 2022
+EXP-202202-025,Other,515.74,02/17/2022,Various,Other - February 2022

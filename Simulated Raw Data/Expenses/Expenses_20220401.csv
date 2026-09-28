@@ -1,0 +1,29 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202204-001,Ingredient Costs,1224.94,04/15/2022,Sugar & Spice Co,Ingredients - April 2022
+EXP-202204-002,Ingredients,973.69,04/02/2022,Sugar & Spice Co,Ingredients - April 2022
+EXP-202204-003,Raw Materials,1205.16,04/23/2022,Bulk Foods Ltd,Ingredients - April 2022
+EXP-202204-004,Ingredients,1070.58,04/16/2022,Bulk Foods Ltd,Ingredients - April 2022
+EXP-202204-005,Raw Materials,1356.72,04/10/2022,Sugar & Spice Co,Ingredients - April 2022
+EXP-202204-006,Raw Materials,1321.68,04/20/2022,Sugar & Spice Co,Ingredients - April 2022
+EXP-202204-007,Ingredient Costs,1362.34,04/08/2022,Sugar & Spice Co,Ingredients - April 2022
+EXP-202204-008,Ingredients,1229.61,04/12/2022,Dairy Distributor,Ingredients - April 2022
+EXP-202204-009,Ingredient Costs,1140.31,04/16/2022,Flour Suppliers Inc,Ingredients - April 2022
+EXP-202204-010,Raw Materials,1116.38,04/23/2022,Dairy Distributor,Ingredients - April 2022
+EXP-202204-011,Ingredient Costs,1010.86,04/04/2022,Dairy Distributor,Ingredients - April 2022
+EXP-202204-012,Ingredient Costs,1025.67,04/23/2022,Bulk Foods Ltd,Ingredients - April 2022
+EXP-202204-013,Raw Materials,1147.9,04/20/2022,Dairy Distributor,Ingredients - April 2022
+EXP-202204-014,Labor,3808.34,04/26/2022,Payroll,Labor - April 2022
+EXP-202204-015,Labor,3660.69,04/17/2022,Payroll,Labor - April 2022
+EXP-202204-016,Labor,4015.05,04/14/2022,Payroll,Labor - April 2022
+EXP-202204-017,Utilities,5000.0,04/02/2022,Utility Company,Rent & Utilities - April 2022
+EXP-202204-018,Utilities,2500.0,04/16/2022,Utility Company,Rent & Utilities - April 2022
+EXP-202204-019,Marketing & Advertising,311.56,04/20/2022,Print Media Inc,Marketing - April 2022
+EXP-202204-020,Marketing & Advertising,448.91,04/21/2022,Digital Ads Co,Marketing - April 2022
+EXP-202204-021,Marketing & Advertising,346.73,04/04/2022,Print Media Inc,Marketing - April 2022
+EXP-202204-022,Marketing & Advertising,375.38,04/07/2022,Print Media Inc,Marketing - April 2022
+EXP-202204-023,Equipment,167.01,04/15/2022,Equipment Supplier,Equipment - April 2022
+EXP-202204-024,Equipment,180.96,04/20/2022,Equipment Supplier,Equipment - April 2022
+EXP-202204-025,Equipment,152.02,04/10/2022,Equipment Supplier,Equipment - April 2022
+EXP-202204-026,Packaging,447.19,04/03/2022,Packaging Co,Packaging - April 2022
+EXP-202204-027,Other,507.4,04/08/2022,Various,Other - April 2022
+EXP-202204-028,Other,435.87,04/07/2022,Various,Other - April 2022

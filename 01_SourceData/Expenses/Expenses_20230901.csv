@@ -1,0 +1,31 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202309-001,Ingredient Costs,996.56,09/15/2023,Sugar & Spice Co,Ingredients - September 2023
+EXP-202309-002,Ingredients,1192.38,09/19/2023,Bulk Foods Ltd,Ingredients - September 2023
+EXP-202309-003,Ingredient Costs,1116.1,09/14/2023,Dairy Distributor,Ingredients - September 2023
+EXP-202309-004,Ingredient Costs,1174.2,09/06/2023,Bulk Foods Ltd,Ingredients - September 2023
+EXP-202309-005,Ingredients,957.0,09/06/2023,Flour Suppliers Inc,Ingredients - September 2023
+EXP-202309-006,Raw Materials,1109.15,09/12/2023,Dairy Distributor,Ingredients - September 2023
+EXP-202309-007,Ingredients,1186.7,09/14/2023,Flour Suppliers Inc,Ingredients - September 2023
+EXP-202309-008,Ingredients,1234.89,09/06/2023,Dairy Distributor,Ingredients - September 2023
+EXP-202309-009,Raw Materials,1208.23,09/17/2023,Dairy Distributor,Ingredients - September 2023
+EXP-202309-010,Raw Materials,927.65,09/13/2023,Sugar & Spice Co,Ingredients - September 2023
+EXP-202309-011,Ingredient Costs,942.49,09/05/2023,Bulk Foods Ltd,Ingredients - September 2023
+EXP-202309-012,Raw Materials,932.78,09/24/2023,Sugar & Spice Co,Ingredients - September 2023
+EXP-202309-013,Ingredient Costs,1217.33,09/16/2023,Bulk Foods Ltd,Ingredients - September 2023
+EXP-202309-014,Ingredients,899.39,09/21/2023,Sugar & Spice Co,Ingredients - September 2023
+EXP-202309-015,Ingredient Costs,1225.17,09/10/2023,Bulk Foods Ltd,Ingredients - September 2023
+EXP-202309-016,Ingredient Costs,1054.83,09/12/2023,Sugar & Spice Co,Ingredients - September 2023
+EXP-202309-017,Staff Costs,6719.14,09/04/2023,Payroll,Labor - September 2023
+EXP-202309-018,Staff Costs,6987.86,09/19/2023,Payroll,Labor - September 2023
+EXP-202309-019,Rent & Utilities,5000.0,09/02/2023,Property Management,Rent & Utilities - September 2023
+EXP-202309-020,Rent & Utilities,2500.0,09/16/2023,Property Management,Rent & Utilities - September 2023
+EXP-202309-021,Marketing & Advertising,443.23,09/22/2023,Digital Ads Co,Marketing - September 2023
+EXP-202309-022,Marketing & Advertising,358.94,09/03/2023,Digital Ads Co,Marketing - September 2023
+EXP-202309-023,Marketing & Advertising,440.3,09/26/2023,Digital Ads Co,Marketing - September 2023
+EXP-202309-024,Marketing & Advertising,475.85,09/05/2023,Digital Ads Co,Marketing - September 2023
+EXP-202309-025,Equipment,266.21,09/15/2023,Equipment Supplier,Equipment - September 2023
+EXP-202309-026,Equipment,267.44,09/13/2023,Equipment Supplier,Equipment - September 2023
+EXP-202309-027,Packaging,165.44,09/20/2023,Packaging Co,Packaging - September 2023
+EXP-202309-028,Packaging,220.1,09/08/2023,Packaging Co,Packaging - September 2023
+EXP-202309-029,Packaging,162.86,09/20/2023,Packaging Co,Packaging - September 2023
+EXP-202309-030,Other,986.91,09/13/2023,Various,Other - September 2023

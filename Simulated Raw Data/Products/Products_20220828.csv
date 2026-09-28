@@ -1,0 +1,88 @@
+ProductID,ProductName,Category,SubCategory,UnitCost,CurrentPrice,IsActive
+PROD-001,Sourdough Plain,Bread,Sourdough,3.14,5.74,Yes
+PROD-002,Sourdough Seeded,Bread,Sourdough,2.22,4.49,Yes
+PROD-003,Sourdough Organic,Bread,Sourdough,3.38,8.38,Yes
+PROD-004,Baguette Plain,Bread,Baguette,3.78,7.13,Yes
+PROD-005,Baguette Seeded,Bread,Baguette,2.58,4.73,Yes
+PROD-006,Baguette Organic,Bread,Baguette,2.08,4.79,Yes
+PROD-007,Ciabatta Plain,Bread,Ciabatta,1.59,3.18,Yes
+PROD-008,Ciabatta Seeded,Bread,Ciabatta,3.16,7.42,Yes
+PROD-009,Ciabatta Organic,Bread,Ciabatta,2.08,4.97,Yes
+PROD-010,Focaccia Plain,Bread,Focaccia,3.57,6.44,Yes
+PROD-011,Focaccia Seeded,Bread,Focaccia,3.56,8.89,Yes
+PROD-012,Focaccia Organic,Bread,Focaccia,2.38,4.66,Yes
+PROD-013,Brioche Plain,Bread,Brioche,3.94,8.42,Yes
+PROD-014,Brioche Seeded,Bread,Brioche,1.75,3.32,Yes
+PROD-015,Brioche Organic,Bread,Brioche,3.67,8.82,Yes
+PROD-016,Whole Wheat Plain,Bread,Whole Wheat,3.57,9.02,Yes
+PROD-017,Whole Wheat Seeded,Bread,Whole Wheat,2.88,7.99,Yes
+PROD-018,Whole Wheat Organic,Bread,Whole Wheat,2.48,5.84,Yes
+PROD-019,Rye Plain,Bread,Rye,3.62,8.75,Yes
+PROD-020,Rye Seeded,Bread,Rye,3.7,8.8,Yes
+PROD-021,Rye Organic,Bread,Rye,3.3,6.1,Yes
+PROD-022,Multigrain Plain,Bread,Multigrain,2.1,4.39,Yes
+PROD-023,Multigrain Seeded,Bread,Multigrain,1.72,3.51,Yes
+PROD-024,Multigrain Organic,Bread,Multigrain,1.77,3.69,Yes
+PROD-025,White Sandwich Plain,Bread,White Sandwich,3.13,6.78,Yes
+PROD-026,White Sandwich Seeded,Bread,White Sandwich,2.46,4.95,Yes
+PROD-027,White Sandwich Organic,Bread,White Sandwich,2.2,6.02,Yes
+PROD-028,Croissant Plain,Pastries,Croissant,3.16,7.62,Yes
+PROD-029,Croissant Seeded,Pastries,Croissant,1.96,4.95,Yes
+PROD-030,Croissant Organic,Pastries,Croissant,1.94,4.22,Yes
+PROD-031,Danish Plain,Pastries,Danish,4.02,9.82,Yes
+PROD-032,Danish Seeded,Pastries,Danish,2.93,7.28,Yes
+PROD-033,Danish Organic,Pastries,Danish,3.66,9.42,Yes
+PROD-034,Muffin Plain,Pastries,Muffin,2.1,3.84,Yes
+PROD-035,Muffin Seeded,Pastries,Muffin,2.32,4.8,Yes
+PROD-036,Muffin Organic,Pastries,Muffin,2.06,5.64,Yes
+PROD-037,Scone Plain,Pastries,Scone,3.74,7.9,Yes
+PROD-038,Scone Seeded,Pastries,Scone,3.18,6.98,Yes
+PROD-039,Scone Organic,Pastries,Scone,3.84,8.67,Yes
+PROD-040,Eclair Plain,Pastries,Eclair,2.19,4.48,Yes
+PROD-041,Eclair Seeded,Pastries,Eclair,2.94,6.06,Yes
+PROD-042,Eclair Organic,Pastries,Eclair,3.0,8.1,Yes
+PROD-043,Tart Plain,Pastries,Tart,2.53,5.12,Yes
+PROD-044,Tart Seeded,Pastries,Tart,4.04,9.34,Yes
+PROD-045,Tart Organic,Pastries,Tart,1.75,3.24,Yes
+PROD-046,Birthday Cake Plain,Cakes,Birthday Cake,1.79,4.36,Yes
+PROD-047,Birthday Cake Seeded,Cakes,Birthday Cake,3.53,7.83,Yes
+PROD-048,Birthday Cake Organic,Cakes,Birthday Cake,1.68,3.67,Yes
+PROD-049,Cheesecake Plain,Cakes,Cheesecake,4.04,9.41,Yes
+PROD-050,Cheesecake Seeded,Cakes,Cheesecake,3.98,10.6,Yes
+PROD-051,Cheesecake Organic,Cakes,Cheesecake,1.55,3.91,Yes
+PROD-052,Layer Cake Plain,Cakes,Layer Cake,3.24,7.58,Yes
+PROD-053,Layer Cake Seeded,Cakes,Layer Cake,2.2,5.37,Yes
+PROD-054,Layer Cake Organic,Cakes,Layer Cake,1.8,4.03,Yes
+PROD-055,Cupcake Plain,Cakes,Cupcake,2.67,7.34,Yes
+PROD-056,Cupcake Seeded,Cakes,Cupcake,3.74,7.71,Yes
+PROD-057,Cupcake Organic,Cakes,Cupcake,2.79,5.51,Yes
+PROD-058,Wedding Cake Plain,Cakes,Wedding Cake,3.83,10.22,Yes
+PROD-059,Wedding Cake Seeded,Cakes,Wedding Cake,2.28,5.56,Yes
+PROD-060,Wedding Cake Organic,Cakes,Wedding Cake,3.06,5.98,Yes
+PROD-061,Chocolate Chip Plain,Cookies,Chocolate Chip,3.46,8.09,Yes
+PROD-062,Chocolate Chip Seeded,Cookies,Chocolate Chip,3.5,8.15,Yes
+PROD-063,Chocolate Chip Organic,Cookies,Chocolate Chip,1.52,3.23,Yes
+PROD-064,Oatmeal Plain,Cookies,Oatmeal,1.57,4.29,Yes
+PROD-065,Oatmeal Seeded,Cookies,Oatmeal,3.75,9.87,Yes
+PROD-066,Oatmeal Organic,Cookies,Oatmeal,2.3,4.28,Yes
+PROD-067,Sugar Cookie Plain,Cookies,Sugar Cookie,3.75,10.3,Yes
+PROD-068,Sugar Cookie Seeded,Cookies,Sugar Cookie,1.73,3.96,Yes
+PROD-069,Sugar Cookie Organic,Cookies,Sugar Cookie,1.69,4.34,Yes
+PROD-070,Macaron Plain,Cookies,Macaron,3.46,6.67,Yes
+PROD-071,Macaron Seeded,Cookies,Macaron,2.73,6.4,Yes
+PROD-072,Macaron Organic,Cookies,Macaron,2.19,5.85,Yes
+PROD-073,Biscotti Plain,Cookies,Biscotti,2.59,5.22,Yes
+PROD-074,Biscotti Seeded,Cookies,Biscotti,2.89,7.31,Yes
+PROD-075,Biscotti Organic,Cookies,Biscotti,2.03,4.28,Yes
+PROD-076,Coffee Plain,Beverages,Coffee,4.04,9.91,Yes
+PROD-077,Coffee Seeded,Beverages,Coffee,2.63,6.11,Yes
+PROD-078,Coffee Organic,Beverages,Coffee,1.82,3.69,Yes
+PROD-079,Tea Plain,Beverages,Tea,2.38,5.68,Yes
+PROD-080,Tea Seeded,Beverages,Tea,2.11,4.26,Yes
+PROD-081,Tea Organic,Beverages,Tea,1.7,4.13,Yes
+PROD-082,Juice Plain,Beverages,Juice,2.1,5.67,Yes
+PROD-083,Juice Seeded,Beverages,Juice,3.7,6.92,Yes
+PROD-084,Juice Organic,Beverages,Juice,2.13,5.25,Yes
+PROD-085,Smoothie Plain,Beverages,Smoothie,2.07,3.99,Yes
+PROD-086,Smoothie Seeded,Beverages,Smoothie,3.89,9.22,Yes
+PROD-087,Smoothie Organic,Beverages,Smoothie,2.72,7.02,Yes

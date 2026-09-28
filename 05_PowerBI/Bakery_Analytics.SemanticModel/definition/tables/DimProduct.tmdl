@@ -1,0 +1,102 @@
+table DimProduct
+	lineageTag: 059b31aa-5f4b-493f-9cc4-873a0fe9bbfe
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6940f6f0-18f5-432d-9499-e7724bec50d7
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductID
+		dataType: string
+		lineageTag: 1a4f8707-4e14-4bde-930f-da54a8fc73b7
+		summarizeBy: none
+		sourceColumn: ProductID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductName
+		dataType: string
+		lineageTag: b48213be-10d6-40aa-b562-b25e70e44bdf
+		summarizeBy: none
+		sourceColumn: ProductName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Category
+		dataType: string
+		lineageTag: d6f90e54-4025-45d4-8485-eed487ff9638
+		summarizeBy: none
+		sourceColumn: Category
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SubCategory
+		dataType: string
+		lineageTag: 81b5699a-27ec-436c-8a93-ca8c46e7d27f
+		summarizeBy: none
+		sourceColumn: SubCategory
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitCost
+		dataType: double
+		lineageTag: 6005d8ea-1a24-4f1c-bbee-be2531d5689d
+		summarizeBy: none
+		sourceColumn: UnitCost
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column CurrentPrice
+		dataType: double
+		lineageTag: 25fda945-5500-4e03-953f-5b425e747eea
+		summarizeBy: none
+		sourceColumn: CurrentPrice
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column IsActive
+		dataType: string
+		lineageTag: d4afd2d8-1ad6-42ad-b07e-badddddbd629
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimProduct = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source =
+				let
+				    Source = stgProduct_Combined
+				in
+				    Source
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

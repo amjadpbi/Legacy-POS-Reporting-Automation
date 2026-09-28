@@ -1,0 +1,32 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202411-001,Ingredients,1825.43,11/23/2024,Dairy Distributor,Ingredients - November 2024
+EXP-202411-002,Ingredient Costs,1340.06,11/26/2024,Bulk Foods Ltd,Ingredients - November 2024
+EXP-202411-003,Ingredient Costs,1384.47,11/17/2024,Flour Suppliers Inc,Ingredients - November 2024
+EXP-202411-004,Ingredient Costs,1771.22,11/23/2024,Sugar & Spice Co,Ingredients - November 2024
+EXP-202411-005,Ingredients,1586.85,11/15/2024,Flour Suppliers Inc,Ingredients - November 2024
+EXP-202411-006,Raw Materials,1797.9,11/21/2024,Sugar & Spice Co,Ingredients - November 2024
+EXP-202411-007,Ingredient Costs,1311.57,11/09/2024,Sugar & Spice Co,Ingredients - November 2024
+EXP-202411-008,Raw Materials,1274.61,11/03/2024,Bulk Foods Ltd,Ingredients - November 2024
+EXP-202411-009,Ingredients,1370.87,11/21/2024,Dairy Distributor,Ingredients - November 2024
+EXP-202411-010,Ingredient Costs,1670.53,11/14/2024,Sugar & Spice Co,Ingredients - November 2024
+EXP-202411-011,Ingredients,1505.17,11/19/2024,Bulk Foods Ltd,Ingredients - November 2024
+EXP-202411-012,Ingredients,1750.07,11/11/2024,Bulk Foods Ltd,Ingredients - November 2024
+EXP-202411-013,Ingredients,1775.11,11/26/2024,Dairy Distributor,Ingredients - November 2024
+EXP-202411-014,Staff Costs,3545.62,11/07/2024,Payroll,Labor - November 2024
+EXP-202411-015,Staff Costs,3728.51,11/22/2024,Payroll,Labor - November 2024
+EXP-202411-016,Staff Costs,3254.56,11/06/2024,Payroll,Labor - November 2024
+EXP-202411-017,Payroll,3515.9,11/14/2024,Payroll,Labor - November 2024
+EXP-202411-018,Utilities,5000.0,11/02/2024,Utility Company,Rent & Utilities - November 2024
+EXP-202411-019,Rent & Utilities,2500.0,11/16/2024,Property Management,Rent & Utilities - November 2024
+EXP-202411-020,Marketing & Advertising,360.28,11/19/2024,Print Media Inc,Marketing - November 2024
+EXP-202411-021,Marketing & Advertising,522.15,11/11/2024,Digital Ads Co,Marketing - November 2024
+EXP-202411-022,Marketing & Advertising,388.76,11/23/2024,Social Media Agency,Marketing - November 2024
+EXP-202411-023,Marketing & Advertising,445.34,11/19/2024,Digital Ads Co,Marketing - November 2024
+EXP-202411-024,Equipment,227.34,11/07/2024,Equipment Supplier,Equipment - November 2024
+EXP-202411-025,Equipment,197.02,11/26/2024,Equipment Supplier,Equipment - November 2024
+EXP-202411-026,Equipment,175.46,11/20/2024,Equipment Supplier,Equipment - November 2024
+EXP-202411-027,Packaging,282.88,11/03/2024,Packaging Co,Packaging - November 2024
+EXP-202411-028,Packaging,248.31,11/09/2024,Packaging Co,Packaging - November 2024
+EXP-202411-029,Other,458.79,11/19/2024,Various,Other - November 2024
+EXP-202411-030,Other,333.45,11/21/2024,Various,Other - November 2024
+EXP-202411-031,Other,394.25,11/10/2024,Various,Other - November 2024

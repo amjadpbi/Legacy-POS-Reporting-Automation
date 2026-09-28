@@ -1,0 +1,185 @@
+table FactSalesLine
+	lineageTag: ca52f063-8d8d-40a2-b96a-d93c7ca3a6c8
+
+	column Quantity
+		dataType: int64
+		formatString: 0
+		lineageTag: 7f3f49f9-eebd-4522-b139-25947c765923
+		summarizeBy: sum
+		sourceColumn: Quantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column UnitPrice
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: abbc5584-bb3e-455e-a182-9ce3b5d99a33
+		summarizeBy: sum
+		sourceColumn: UnitPrice
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column Discount
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: da44a81e-2c0d-42ed-a140-a0a4ceba46af
+		summarizeBy: sum
+		sourceColumn: Discount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column Tax
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: 268d0a8b-1692-47eb-9859-d43cc86331c2
+		summarizeBy: sum
+		sourceColumn: Tax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column LineAmount
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: 251f3c0e-62cb-43d9-84df-8e933d5bc7e4
+		summarizeBy: sum
+		sourceColumn: LineAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column NetLineAmount
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: eff911ec-d34a-4cc3-a2e1-da989fd1c67f
+		summarizeBy: sum
+		sourceColumn: NetLineAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column SalesHeaderKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 3ca19406-75dc-4194-8c4a-860766195741
+		summarizeBy: none
+		sourceColumn: SalesHeaderKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProductKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 043311a9-d902-452a-8629-f9de2b845473
+		summarizeBy: none
+		sourceColumn: ProductKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 32b6c4a7-be84-4893-a898-ecfb36f66021
+		summarizeBy: count
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactSalesLine = m
+		mode: import
+		queryGroup: '9_Fact Tables'
+		source =
+				let
+				    Source = stgSales_Combined,
+				
+				    #"Added LineAmount" =
+				        Table.AddColumn(
+				            Source,
+				            "LineAmount",
+				            each [Quantity] * [UnitPrice],
+				            Currency.Type
+				        ),
+				
+				    #"Added NetLineAmount" =
+				        Table.AddColumn(
+				            #"Added LineAmount",
+				            "NetLineAmount",
+				            each ([Quantity] * [UnitPrice]) - [Discount] + [Tax],
+				            Currency.Type
+				        ),
+				
+				    Grouped =
+				        Table.Group(
+				            #"Added NetLineAmount",
+				            {"OrderID"},
+				            {
+				                {
+				                    "Data",
+				                    (t as table) =>
+				                        Table.AddIndexColumn(t, "LineNumber", 1, 1, Int64.Type),
+				                    type table
+				                }
+				            }
+				        ),
+				
+				    Expanded =
+				    Table.ExpandTableColumn(
+				        Grouped,
+				        "Data",
+				        List.RemoveItems(
+				            Table.ColumnNames(#"Added NetLineAmount"),
+				            {"OrderID"}
+				        ) & {"LineNumber"}
+				    ),
+				    #"Changed Type" = Table.TransformColumnTypes(Expanded,{{"NetLineAmount", Currency.Type}, {"LineAmount", Currency.Type}, {"Tax", Currency.Type}, {"Discount", Currency.Type}, {"UnitPrice", Currency.Type}, {"Quantity", Int64.Type}}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Changed Type",{"Name"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Columns", {"OrderID"}, FactSalesHeader, {"OrderID"}, "FactSalesHeader", JoinKind.LeftOuter),
+				    #"Expanded FactSalesHeader" = Table.ExpandTableColumn(#"Merged Queries", "FactSalesHeader", {"SalesHeaderKey"}, {"SalesHeaderKey"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded FactSalesHeader",{"SalesHeaderKey", "OrderID", "CustomerID", "ProductID", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus", "LineAmount", "NetLineAmount", "LineNumber"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Reordered Columns", {"CustomerID"}, DimCustomer, {"CustomerID"}, "DimCustomer", JoinKind.LeftOuter),
+				    #"Expanded DimCustomer" = Table.ExpandTableColumn(#"Merged Queries1", "DimCustomer", {"CustomerKey"}, {"CustomerKey"}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Expanded DimCustomer",{"SalesHeaderKey", "OrderID", "CustomerKey", "CustomerID", "ProductID", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus", "LineAmount", "NetLineAmount", "LineNumber"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns1",{"CustomerID"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Removed Columns1", {"ProductID"}, DimProduct, {"ProductID"}, "DimProduct", JoinKind.LeftOuter),
+				    #"Expanded DimProduct" = Table.ExpandTableColumn(#"Merged Queries2", "DimProduct", {"ProductKey"}, {"ProductKey"}),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Expanded DimProduct",{"SalesHeaderKey", "OrderID", "CustomerKey", "ProductID", "ProductKey", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus", "LineAmount", "NetLineAmount", "LineNumber"}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns2",{"ProductID"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Removed Columns2", {"OrderDate"}, DimDate, {"Date"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Merged Queries3", "DimDate", {"DateKey"}, {"DateKey"}),
+				    #"Reordered Columns3" = Table.ReorderColumns(#"Expanded DimDate",{"SalesHeaderKey", "OrderID", "DateKey", "ProductKey", "CustomerKey", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "LineNumber", "Location", "LeadTime", "OrderStatus", "LineAmount", "NetLineAmount"}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Reordered Columns3",{"CustomerKey", "OrderDate", "PaymentMethod", "LineNumber", "Location", "LeadTime", "OrderStatus", "OrderID"})
+				in
+				    #"Removed Columns3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

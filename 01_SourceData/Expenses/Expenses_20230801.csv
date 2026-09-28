@@ -1,0 +1,30 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202308-001,Ingredient Costs,1118.42,08/17/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-002,Ingredients,1032.71,08/06/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-003,Ingredient Costs,1025.24,08/15/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-004,Ingredients,1159.73,08/26/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-005,Raw Materials,1050.63,08/01/2023,Bulk Foods Ltd,Ingredients - August 2023
+EXP-202308-006,Raw Materials,1123.91,08/01/2023,Bulk Foods Ltd,Ingredients - August 2023
+EXP-202308-007,Raw Materials,1102.81,08/10/2023,Flour Suppliers Inc,Ingredients - August 2023
+EXP-202308-008,Ingredient Costs,1091.68,08/12/2023,Sugar & Spice Co,Ingredients - August 2023
+EXP-202308-009,Ingredients,1255.06,08/19/2023,Flour Suppliers Inc,Ingredients - August 2023
+EXP-202308-010,Ingredients,1201.91,08/20/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-011,Ingredient Costs,1234.45,08/06/2023,Sugar & Spice Co,Ingredients - August 2023
+EXP-202308-012,Raw Materials,932.96,08/19/2023,Sugar & Spice Co,Ingredients - August 2023
+EXP-202308-013,Ingredients,1173.58,08/15/2023,Bulk Foods Ltd,Ingredients - August 2023
+EXP-202308-014,Ingredient Costs,1259.53,08/26/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-015,Ingredients,925.16,08/11/2023,Dairy Distributor,Ingredients - August 2023
+EXP-202308-016,Ingredient Costs,1236.22,08/24/2023,Sugar & Spice Co,Ingredients - August 2023
+EXP-202308-017,Labor,4583.81,08/15/2023,Payroll,Labor - August 2023
+EXP-202308-018,Staff Costs,4362.53,08/19/2023,Payroll,Labor - August 2023
+EXP-202308-019,Labor,4347.46,08/22/2023,Payroll,Labor - August 2023
+EXP-202308-020,Utilities,5000.0,08/02/2023,Utility Company,Rent & Utilities - August 2023
+EXP-202308-021,Rent & Utilities,2500.0,08/16/2023,Property Management,Rent & Utilities - August 2023
+EXP-202308-022,Marketing & Advertising,452.42,08/19/2023,Social Media Agency,Marketing - August 2023
+EXP-202308-023,Marketing,590.21,08/17/2023,Print Media Inc,Marketing - August 2023
+EXP-202308-024,Marketing,485.36,08/21/2023,Digital Ads Co,Marketing - August 2023
+EXP-202308-025,Equipment,195.2,08/18/2023,Equipment Supplier,Equipment - August 2023
+EXP-202308-026,Equipment,179.2,08/15/2023,Equipment Supplier,Equipment - August 2023
+EXP-202308-027,Equipment,183.43,08/08/2023,Equipment Supplier,Equipment - August 2023
+EXP-202308-028,Packaging,553.92,08/17/2023,Packaging Co,Packaging - August 2023
+EXP-202308-029,Other,1290.42,08/14/2023,Various,Other - August 2023

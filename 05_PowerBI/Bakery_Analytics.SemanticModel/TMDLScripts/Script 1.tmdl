@@ -1,0 +1,459 @@
+createOrReplace
+
+	/// Path to the source data folder
+	expression pDataFolderPath = "D:\Power BI\X PowerBI_Bakery_Project\01_SourceData" meta [IsParameterQuery=true, Type="Text", IsParameterQueryRequired=true]
+		lineageTag: 31610c7a-0ef3-4c5e-8e1e-6d2962511455
+		queryGroup: 01_Parameters
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Text
+
+	expression ColumnMapping =
+			let
+			    Source = Excel.Workbook(File.Contents("D:\Power BI\X PowerBI_Bakery_Project\02_Configuration\ColumnMappingConfig.xlsx"), null, true),
+			    MappingTable_Sheet = Source{[Item="MappingTable",Kind="Sheet"]}[Data],
+			    #"Promoted Headers" = Table.PromoteHeaders(MappingTable_Sheet, [PromoteAllScalars=true])
+			in
+			    #"Promoted Headers"
+		lineageTag: 4fa218eb-695b-4313-957d-cb95353df93a
+		queryGroup: '02_Configuration Tables'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
+	expression fnclean_sales = ```
+			(file as binary) as table =>
+			let
+			    // --- Step 1: Read file as text
+			    Source = Text.FromBinary(file, TextEncoding.Utf8),
+			
+			    // --- Step 2: Split into lines
+			    Lines = Lines.FromText(Source),
+			
+			    // --- Step 3: Remove empty lines
+			    NonEmptyLines = List.Select(Lines, each Text.Trim(_) <> ""),
+			
+			    // --- Step 4: Remove junk/report lines
+			    CleanLines = List.Select(
+			        NonEmptyLines,
+			        each not Text.StartsWith(_, "Report Generated")
+			             and not Text.StartsWith(_, "Sales Export")
+			    ),
+			
+			    // --- Step 5: Standardize header lines
+			    StandardHeader = "OrderID,CustomerID,ProductID,OrderDate,Quantity,UnitPrice,Discount,Tax,PaymentMethod,Location,LeadTime,OrderStatus",
+			    FixedHeaders = List.Transform(
+			        CleanLines,
+			        each if Text.Contains(_, "Order ID") 
+			             or Text.Contains(_, "SalesOrderID") 
+			             or Text.Contains(_, "Unit Price") 
+			             or Text.Contains(_, "Price")
+			             or Text.Contains(_, "ProdID") then StandardHeader else _
+			    ),
+			
+			    // --- Step 6: Keep only data lines (header + rows)
+			    DataLines = List.Select(
+			        FixedHeaders,
+			        each Text.Contains(_, "OrderID") or Text.Contains(_, "ORD-")
+			    ),
+			
+			    // --- Step 7: Recombine into CSV
+			    RebuiltCSV = Text.Combine(DataLines, "#(lf)"),
+			    CsvTable = Csv.Document(RebuiltCSV, [Delimiter=",", Encoding=65001]),
+			
+			    // --- Step 8: Promote headers
+			    PromotedHeaders = Table.PromoteHeaders(CsvTable, [PromoteAllScalars=true]),
+			
+			    // --- Step 9: Rename all column variants to standard names
+			    RenamedColumns = Table.RenameColumns(
+			        PromotedHeaders,
+			        {
+			            {"Unit Price", "UnitPrice"},
+			            {"Price", "UnitPrice"},
+			            {"Tax Amount", "Tax"},
+			            {"ProdID", "ProductID"}
+			        },
+			        MissingField.Ignore
+			    ),
+			
+			    // --- Step 10: Clean numeric columns safely
+			    CleanNumeric = Table.TransformColumns(
+			        RenamedColumns,
+			        {
+			            {"UnitPrice", each try Number.From(Text.Select(Text.From(_), {"0".."9",".","-"})) otherwise null, type number},
+			            {"Discount", each try Number.From(Text.Select(Text.From(_), {"0".."9",".","-"})) otherwise null, type number},
+			            {"Tax", each try Number.From(Text.Select(Text.From(_), {"0".."9",".","-"})) otherwise null, type number}
+			        }
+			    ),
+			
+			    // --- Step 11: Convert other types
+			    FinalTable = Table.TransformColumnTypes(
+			        CleanNumeric,
+			        {
+			            {"OrderID", type text},
+			            {"CustomerID", type text},
+			            {"ProductID", type text},
+			            {"OrderDate", type date},
+			            {"Quantity", Int64.Type},
+			            {"PaymentMethod", type text},
+			            {"Location", type text},
+			            {"LeadTime", Int64.Type},
+			            {"OrderStatus", type text}
+			        }
+			    )
+			in
+			    FinalTable
+			```
+		lineageTag: 41ecc87b-6e69-4a32-a216-7d532b0c2cbb
+		queryGroup: 03_Functions
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Function
+
+	expression stgSales_Combined =
+			let
+			    Source = Folder.Files(pDataFolderPath & "\Sales\"),
+			    #"Added Custom" = Table.AddColumn(Source, "Data", each fnclean_sales([Content])),
+			    #"Added Custom1" = Table.AddColumn(#"Added Custom", "Custom", each Text.Start(Text.FromBinary([Content]),200)),
+			    #"Removed Columns" = Table.RemoveColumns(#"Added Custom1",{"Custom"}),
+			    #"Expanded Data" = Table.ExpandTableColumn(#"Removed Columns", "Data", {"OrderID", "CustomerID", "ProductID", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus"}, {"OrderID", "CustomerID", "ProductID", "OrderDate", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus"}),
+			    #"Removed Columns1" = Table.RemoveColumns(#"Expanded Data",{"Content", "Extension", "Date accessed", "Date modified", "Date created", "Attributes", "Folder Path"}),
+			    #"Added Custom2" = Table.AddColumn(#"Removed Columns1", "Custom", each let
+			    DateText = Text.Middle([Name], 6, 8),
+			    Year = Text.Start(DateText, 4),
+			    Month = Text.Range(DateText, 4, 2),
+			    Day = Text.End(DateText, 2)
+			in
+			    Date.FromText(Year & "-" & Month & "-" & Day)),
+			    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom2",{{"Custom", type date}}),
+			    #"Renamed Columns" = Table.RenameColumns(#"Changed Type",{{"OrderDate", "OrderDate 1"}, {"Custom", "OrderDate"}}),
+			    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"Name", "OrderID", "CustomerID", "ProductID", "OrderDate", "OrderDate 1", "Quantity", "UnitPrice", "Discount", "Tax", "PaymentMethod", "Location", "LeadTime", "OrderStatus"}),
+			    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns",{"OrderDate 1"})
+			in
+			    #"Removed Columns2"
+		lineageTag: fbfdd9f8-6bf7-458c-a2c5-eda7a75ec4f4
+		queryGroup: '04_Staging - Sales'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
+	expression stgExpenses = ```
+			let
+			    // Connect to Expenses folder
+			    Source = Folder.Files(pDataFolderPath & "\Expenses\"),
+			    FilterCSV = Table.SelectRows(Source, each [Extension] = ".csv"),
+			    
+			    // Load each CSV file
+			    AddedData = Table.AddColumn(FilterCSV, "Data", each
+			        let
+			            LoadedCSV = Csv.Document([Content]),
+			            Promoted = Table.PromoteHeaders(LoadedCSV, [PromoteAllScalars=true])
+			        in
+			            Promoted
+			    ),
+			    
+			    // Expand columns
+			    ExpandedData = Table.ExpandTableColumn(
+			        AddedData,
+			        "Data",
+			        {"ExpenseID", "CategoryName", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"}
+			    ),
+			    
+			    // FIX DATE FORMAT - Same as Customer fix
+			    FixedDate = Table.TransformColumns(ExpandedData, {
+			        {"ExpenseDate", each 
+			            if _ <> null and _ <> "" then
+			                Date.FromText(_, [Format="MM/dd/yyyy"])
+			            else
+			                null,
+			            type date
+			        }
+			    }),
+			    
+			    // Change other types
+			    ChangedTypes = Table.TransformColumnTypes(FixedDate, {
+			        {"ExpenseID", type text},
+			        {"CategoryName", type text},
+			        {"ExpenseAmount", type number},
+			        {"VendorName", type text},
+			        {"Description", type text}
+			    }),
+			    
+			    // Remove extra columns (keep only data columns)
+			    RemovedColumns = Table.SelectColumns(ChangedTypes, {
+			        "ExpenseID", "CategoryName", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"
+			    })
+			in
+			    RemovedColumns
+			```
+		lineageTag: 56cc22f8-2798-4cbf-97b2-c2136b8a1f32
+		queryGroup: '08_Staging - Expenses'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
+	expression stgProduct_Combined = ```
+			let
+			    // Connect to Products folder
+			    Source = Folder.Files(pDataFolderPath & "\Products\"),
+			    FilterCSV = Table.SelectRows(Source, each [Extension] = ".csv"),
+			    
+			    // Load and clean each file
+			    AddedData = Table.AddColumn(FilterCSV, "Data", each
+			        let
+			            LoadedCSV = Csv.Document([Content]),
+			            Promoted = Table.PromoteHeaders(LoadedCSV, [PromoteAllScalars=true])
+			        in
+			            Promoted
+			    ),
+			    
+			    // Expand
+			    ExpandedData = Table.ExpandTableColumn(AddedData, "Data", 
+			        {"ProductID", "ProductName", "Category", "SubCategory", "UnitCost", "CurrentPrice", "IsActive"}
+			    ),
+			    
+			    // Sort by filename descending (latest snapshot first)
+			    Sorted = Table.Sort(ExpandedData, {{"Name", Order.Descending}}),
+			    
+			    // Remove duplicates (keep latest ProductID only)
+			    RemovedDuplicates = Table.Distinct(Sorted, {"ProductID"}),
+			    
+			    // Generate ProductKey using index
+			    AddedProductKey = Table.AddIndexColumn(RemovedDuplicates, "ProductKey", 1, 1, Int64.Type),
+			    
+			    // Add Unknown row
+			    UnknownRow = #table(
+			        {"ProductKey", "ProductID", "ProductName", "Category", "SubCategory", "UnitCost", "CurrentPrice", "IsActive"},
+			        {{-1, "UNKNOWN", "Unknown Product", "Unknown", "Unknown", 0, 0, "No"}}
+			    ),
+			    
+			    // Combine
+			    Combined = Table.Combine({UnknownRow, AddedProductKey}),
+			    
+			    // Select final columns
+			    FinalColumns = Table.SelectColumns(Combined, 
+			        {"ProductKey", "ProductID", "ProductName", "Category", "SubCategory", "UnitCost", "CurrentPrice", "IsActive"}
+			    ),
+			    
+			    // Change types
+			    ChangedTypes = Table.TransformColumnTypes(FinalColumns, {
+			        {"ProductKey", Int64.Type},
+			        {"ProductID", type text},
+			        {"ProductName", type text},
+			        {"Category", type text},
+			        {"SubCategory", type text},
+			        {"UnitCost", type number},
+			        {"CurrentPrice", type number},
+			        {"IsActive", type text}
+			    })
+			in
+			    ChangedTypes
+			```
+		lineageTag: d58af9f1-4544-4bed-8b5c-3af5464bd1c6
+		queryGroup: '06_Staging - Products'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
+	expression stgCustomer_Combined = ```
+			let
+			    // Connect to Customers folder
+			    Source = Folder.Files(pDataFolderPath & "\Customers\"),
+			    FilterCSV = Table.SelectRows(Source, each [Extension] = ".csv"),
+			    
+			    // Load and clean each file
+			    AddedData = Table.AddColumn(FilterCSV, "Data", each
+			        let
+			            LoadedCSV = Csv.Document([Content]),
+			            Promoted = Table.PromoteHeaders(LoadedCSV, [PromoteAllScalars=true])
+			        in
+			            Promoted
+			    ),
+			    
+			    // Expand
+			    ExpandedData = Table.ExpandTableColumn(
+			        AddedData,
+			        "Data",
+			        {"CustomerID", "CustomerName", "CustomerType", "Email", "Phone", "RegistrationDate", "IsActive"}
+			    ),
+			    
+			    // Sort by filename descending (latest snapshot first)
+			    Sorted = Table.Sort(ExpandedData, {{"Name", Order.Descending}}),
+			    
+			    // Remove duplicates (keep latest CustomerID only)
+			    RemovedDuplicates = Table.Distinct(Sorted, {"CustomerID"}),
+			    
+			    // Generate CustomerKey using index
+			    AddedCustomerKey = Table.AddIndexColumn(RemovedDuplicates, "CustomerKey", 1, 1, Int64.Type),
+			
+			    // Add Unknown row
+			    UnknownRow = #table(
+			        {"CustomerKey", "CustomerID", "CustomerName", "CustomerType", "Email", "Phone", "RegistrationDate", "IsActive"},
+			        {{-1, "UNKNOWN", "Unknown Customer", "Unknown", "", "", #date(2022,1,1), "No"}}
+			    ),
+			    
+			    // Combine
+			    Combined = Table.Combine({UnknownRow, AddedCustomerKey}),
+			    
+			    // Select final columns
+			    FinalColumns = Table.SelectColumns(
+			        Combined,
+			        {"CustomerKey", "CustomerID", "CustomerName", "CustomerType", "Email", "Phone", "RegistrationDate", "IsActive"}
+			    ),
+			
+			    // 🔹 FIX STARTS HERE — Safe Date Parsing
+			    ForceText = Table.TransformColumnTypes(FinalColumns, {
+			        {"RegistrationDate", type text}
+			    }),
+			
+			    ParsedDate = Table.AddColumn(
+			        ForceText,
+			        "RegistrationDate_Clean",
+			        each
+			            let
+			                CleanText = Text.Trim([RegistrationDate])
+			            in
+			                if CleanText = null or CleanText = "" then null
+			                else if Text.Contains(CleanText, "-") then
+			                    try Date.FromText(CleanText) otherwise null
+			                else if Text.Contains(CleanText, "/") then
+			                    let
+			                        Parts = Text.Split(CleanText, "/"),
+			                        P1 = Number.FromText(Parts{0}),
+			                        P2 = Number.FromText(Parts{1}),
+			                        P3 = Number.FromText(Parts{2})
+			                    in
+			                        if P1 > 12 then
+			                            #date(P3, P2, P1)
+			                        else
+			                            #date(P3, P1, P2)
+			                else null,
+			        type date
+			    ),
+			
+			    RemovedOld = Table.RemoveColumns(ParsedDate, {"RegistrationDate"}),
+			
+			    Renamed = Table.RenameColumns(RemovedOld, {
+			        {"RegistrationDate_Clean", "RegistrationDate"}
+			    }),
+			    // 🔹 FIX ENDS HERE
+			
+			    // Change final types
+			    ChangedTypes = Table.TransformColumnTypes(Renamed, {
+			        {"CustomerKey", Int64.Type},
+			        {"CustomerID", type text},
+			        {"CustomerName", type text},
+			        {"CustomerType", type text},
+			        {"Email", type text},
+			        {"Phone", type text},
+			        {"RegistrationDate", type date},
+			        {"IsActive", type text}
+			    }),
+			    #"Reordered Columns" = Table.ReorderColumns(ChangedTypes,{"CustomerKey", "CustomerID", "CustomerName", "CustomerType", "Email", "Phone", "RegistrationDate", "IsActive"})
+			in
+			    #"Reordered Columns"
+			```
+		lineageTag: 2b0558db-df85-49d8-ba07-ef42957417ef
+		queryGroup: '07_Staging - Customers'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+
+	expression stgPayments_Combined = ```
+			let
+			    // Connect to Payments folder
+			    Source = Folder.Files(pDataFolderPath & "\Payments\"),
+			    FilterCSV = Table.SelectRows(Source, each [Extension] = ".csv"),
+			    
+			    // Load each file (no junk headers - files are clean)
+			    AddedData = Table.AddColumn(FilterCSV, "Data", each
+			        let
+			            LoadedCSV = Csv.Document([Content]),
+			            Promoted = Table.PromoteHeaders(LoadedCSV, [PromoteAllScalars=true])
+			        in
+			            Promoted
+			    ),
+			    
+			    // Expand columns
+			    ExpandedData = Table.ExpandTableColumn(
+			        AddedData,
+			        "Data",
+			        {"PaymentID", "SalesOrderID", "PaymentAmount", "PaymentDate", "PaymentStatus", "PaymentMethod", "FeeAmount", "ReconciliationDate"}
+			    ),
+			    
+			    // Add SourceFileName
+			    AddedSourceFile = Table.RenameColumns(
+			        Table.SelectColumns(ExpandedData, {"Name", "PaymentID", "SalesOrderID", "PaymentAmount", "PaymentDate", "PaymentStatus", "PaymentMethod", "FeeAmount", "ReconciliationDate"}),
+			        {{"Name", "SourceFileName"}}
+			    ),
+			    
+			    // FIX DATES - PaymentDate
+			    FixedPaymentDate = Table.TransformColumns(AddedSourceFile, {
+			        {"PaymentDate", each 
+			            if _ <> null and _ <> "" then
+			                Date.FromText(_, [Format="MM/dd/yyyy"])
+			            else
+			                null,
+			            type date
+			        }
+			    }),
+			    
+			    // FIX DATES - ReconciliationDate (can be empty)
+			    FixedReconciliationDate = Table.TransformColumns(FixedPaymentDate, {
+			        {"ReconciliationDate", each 
+			            if _ <> null and _ <> "" then
+			                Date.FromText(_, [Format="MM/dd/yyyy"])
+			            else
+			                null,
+			            type date
+			        }
+			    }),
+			    
+			    // Change other types
+			    ChangedTypes = Table.TransformColumnTypes(FixedReconciliationDate, {
+			        {"PaymentID", type text},
+			        {"SalesOrderID", type text},
+			        {"PaymentAmount", type number},
+			        {"PaymentStatus", type text},
+			        {"PaymentMethod", type text},
+			        {"FeeAmount", type number},
+			        {"SourceFileName", type text}
+			    }),
+			    
+			    // Add IsReconciled flag (TRUE if status = "Received")
+			    AddedIsReconciled = Table.AddColumn(ChangedTypes, "IsReconciled", each 
+			        [PaymentStatus] = "Received",
+			        type logical
+			    ),
+			    
+			    // Add LoadDateTime
+			    AddedLoadDateTime = Table.AddColumn(AddedIsReconciled, "LoadDateTime", each 
+			        DateTime.LocalNow(), 
+			        type datetime
+			    ),
+			    
+			    // Final column order
+			    ReorderedColumns = Table.SelectColumns(AddedLoadDateTime, {
+			        "PaymentID", "SalesOrderID", "PaymentAmount", "PaymentDate", 
+			        "PaymentStatus", "PaymentMethod", "FeeAmount", "ReconciliationDate",
+			        "IsReconciled", "SourceFileName", "LoadDateTime"
+			    }),
+			    #"Changed Type" = Table.TransformColumnTypes(ReorderedColumns,{{"PaymentAmount", Currency.Type}, {"FeeAmount", Currency.Type}}),
+			    #"Reordered Columns" = Table.ReorderColumns(#"Changed Type",{"SourceFileName", "PaymentID", "SalesOrderID", "PaymentAmount", "PaymentDate", "PaymentStatus", "PaymentMethod", "FeeAmount", "ReconciliationDate", "IsReconciled", "LoadDateTime"})
+			in
+			    #"Reordered Columns"
+			```
+		lineageTag: 2b336573-8391-4e92-a0f5-25013ac980cc
+		queryGroup: '05_Staging - Payments'
+
+		annotation PBI_NavigationStepName = Navigation
+
+		annotation PBI_ResultType = Table
+

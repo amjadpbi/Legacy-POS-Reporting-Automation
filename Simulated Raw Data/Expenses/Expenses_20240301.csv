@@ -1,0 +1,30 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202403-001,Ingredient Costs,1346.85,03/04/2024,Bulk Foods Ltd,Ingredients - March 2024
+EXP-202403-002,Ingredients,1285.79,03/22/2024,Bulk Foods Ltd,Ingredients - March 2024
+EXP-202403-003,Ingredient Costs,1195.93,03/14/2024,Dairy Distributor,Ingredients - March 2024
+EXP-202403-004,Ingredients,1226.63,03/07/2024,Sugar & Spice Co,Ingredients - March 2024
+EXP-202403-005,Ingredient Costs,1102.43,03/11/2024,Sugar & Spice Co,Ingredients - March 2024
+EXP-202403-006,Ingredients,953.66,03/21/2024,Sugar & Spice Co,Ingredients - March 2024
+EXP-202403-007,Raw Materials,1166.16,03/20/2024,Dairy Distributor,Ingredients - March 2024
+EXP-202403-008,Ingredient Costs,1058.33,03/15/2024,Bulk Foods Ltd,Ingredients - March 2024
+EXP-202403-009,Raw Materials,1080.65,03/22/2024,Sugar & Spice Co,Ingredients - March 2024
+EXP-202403-010,Raw Materials,1360.75,03/10/2024,Bulk Foods Ltd,Ingredients - March 2024
+EXP-202403-011,Ingredients,1161.94,03/21/2024,Flour Suppliers Inc,Ingredients - March 2024
+EXP-202403-012,Ingredients,1063.66,03/15/2024,Flour Suppliers Inc,Ingredients - March 2024
+EXP-202403-013,Ingredients,1228.11,03/17/2024,Dairy Distributor,Ingredients - March 2024
+EXP-202403-014,Raw Materials,1137.78,03/09/2024,Bulk Foods Ltd,Ingredients - March 2024
+EXP-202403-015,Ingredient Costs,1119.03,03/25/2024,Sugar & Spice Co,Ingredients - March 2024
+EXP-202403-016,Payroll,3752.54,03/10/2024,Payroll,Labor - March 2024
+EXP-202403-017,Labor,3445.79,03/13/2024,Payroll,Labor - March 2024
+EXP-202403-018,Staff Costs,3508.01,03/10/2024,Payroll,Labor - March 2024
+EXP-202403-019,Labor,3241.86,03/06/2024,Payroll,Labor - March 2024
+EXP-202403-020,Utilities,5000.0,03/02/2024,Utility Company,Rent & Utilities - March 2024
+EXP-202403-021,Marketing & Advertising,419.69,03/18/2024,Print Media Inc,Marketing - March 2024
+EXP-202403-022,Marketing & Advertising,489.04,03/23/2024,Social Media Agency,Marketing - March 2024
+EXP-202403-023,Marketing & Advertising,506.9,03/21/2024,Social Media Agency,Marketing - March 2024
+EXP-202403-024,Marketing,421.25,03/25/2024,Print Media Inc,Marketing - March 2024
+EXP-202403-025,Equipment,598.42,03/01/2024,Equipment Supplier,Equipment - March 2024
+EXP-202403-026,Packaging,314.95,03/03/2024,Packaging Co,Packaging - March 2024
+EXP-202403-027,Packaging,313.47,03/12/2024,Packaging Co,Packaging - March 2024
+EXP-202403-028,Other,502.14,03/15/2024,Various,Other - March 2024
+EXP-202403-029,Other,491.32,03/22/2024,Various,Other - March 2024

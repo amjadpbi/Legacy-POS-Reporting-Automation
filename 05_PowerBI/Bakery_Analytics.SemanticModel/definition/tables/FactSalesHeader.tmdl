@@ -1,0 +1,208 @@
+table FactSalesHeader
+	lineageTag: e3762359-3cc4-4bbc-a228-39e1d108c1c5
+
+	column OrderID
+		dataType: string
+		isHidden
+		lineageTag: 159a33dd-e873-47e4-84e1-1ee63a6cdde2
+		summarizeBy: none
+		sourceColumn: OrderID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column OrderDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: a48a81c5-d14e-48c3-a473-1bc38785e86f
+		summarizeBy: none
+		sourceColumn: OrderDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column OrderStatus
+		dataType: string
+		lineageTag: 84fe4009-0279-4f15-b1fa-29f25abafa74
+		summarizeBy: none
+		sourceColumn: OrderStatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalQuantity
+		dataType: int64
+		formatString: 0
+		lineageTag: d9181152-1fd4-409e-8169-ee0562229788
+		summarizeBy: sum
+		sourceColumn: TotalQuantity
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column GrossAmount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: bde53dd2-6b8c-4856-bc08-27b026721434
+		summarizeBy: sum
+		sourceColumn: GrossAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalDiscount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 70d33d20-88bd-456f-adbf-9b32e54f866e
+		summarizeBy: sum
+		sourceColumn: TotalDiscount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column TotalTax
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: 25139ee0-36e5-4135-a412-6b1e9ecb5043
+		summarizeBy: sum
+		sourceColumn: TotalTax
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column NetAmount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: c01d011e-b561-4639-bea3-b762d72fb204
+		summarizeBy: sum
+		sourceColumn: NetAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesHeaderKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cd56f1eb-5270-4eb8-b1f2-4e6594a6e76c
+		summarizeBy: none
+		sourceColumn: SalesHeaderKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CustomerKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: b1fba60c-90d8-4dd5-9411-0b6b53fda75f
+		summarizeBy: none
+		sourceColumn: CustomerKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: f44dff21-ff28-4be6-ad1d-a74a291b2fdc
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column LocationKey
+		dataType: string
+		isHidden
+		lineageTag: 14b2a753-7ae0-43f3-9248-087f5a79c6d3
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 47b971ab-5cff-4bd0-85eb-227b82f6796b
+		summarizeBy: none
+		sourceColumn: PaymentMethodKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactSalesHeader = m
+		mode: import
+		queryGroup: '9_Fact Tables'
+		source =
+				let
+				    Source = stgSales_Combined,
+				    #"Added Custom" = Table.AddColumn(Source, "LineAmount", each [Quantity] * [UnitPrice]),
+				    #"Added Custom1" = Table.AddColumn(#"Added Custom", "NetLineAmount", each ([Quantity] * [UnitPrice]) - [Discount] + [Tax]),
+				  Grouped =
+				    Table.Group(
+				        (#"Added Custom1"),
+				        {"OrderID"},
+				        {
+				            {"CustomerID", each List.First([CustomerID]), type text},
+				            {"OrderDate", each List.First([OrderDate]), type date},
+				            {"Location", each List.First([Location]), type text},
+				            {"OrderStatus", each List.First([OrderStatus]), type text},
+				            {"LeadTime", each List.First([LeadTime]), Int64.Type},
+				            {"PaymentMethod", each List.First([PaymentMethod]), Int64.Type},
+				            {"TotalQuantity", each List.Sum([Quantity]), Int64.Type},
+				            {"GrossAmount", each List.Sum([LineAmount]), type number},
+				            {"TotalDiscount", each List.Sum([Discount]), type number},
+				            {"TotalTax", each List.Sum([Tax]), type number},
+				            {"NetAmount", each List.Sum([NetLineAmount]), type number}
+				        }
+				    ),
+				    #"Added Index" = Table.AddIndexColumn(Grouped, "Index", 1, 1, Int64.Type),
+				    #"Renamed Columns" = Table.RenameColumns(#"Added Index",{{"Index", "SalesHeaderKey"}}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Renamed Columns",{"SalesHeaderKey", "OrderID", "CustomerID", "OrderDate", "Location", "OrderStatus", "LeadTime", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Reordered Columns",{{"NetAmount", Currency.Type}, {"TotalTax", Currency.Type}, {"TotalDiscount", Currency.Type}, {"GrossAmount", Currency.Type}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Changed Type", {"CustomerID"}, DimCustomer, {"CustomerID"}, "DimCustomer", JoinKind.LeftOuter),
+				    #"Expanded DimCustomer" = Table.ExpandTableColumn(#"Merged Queries", "DimCustomer", {"CustomerKey"}, {"DimCustomer.CustomerKey"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Expanded DimCustomer",{{"DimCustomer.CustomerKey", "CustomerKey"}}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Renamed Columns1",{"SalesHeaderKey", "OrderID", "CustomerKey", "CustomerID", "OrderDate", "Location", "OrderStatus", "LeadTime", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns1",{"CustomerID"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns", {"OrderDate"}, DimDate, {"Date"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Merged Queries1", "DimDate", {"DateKey"}, {"DimDate.DateKey"}),
+				    #"Renamed Columns2" = Table.RenameColumns(#"Expanded DimDate",{{"DimDate.DateKey", "DateKey"}}),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Renamed Columns2",{"SalesHeaderKey", "OrderID", "CustomerKey", "DateKey", "OrderDate", "Location", "OrderStatus", "LeadTime", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount"}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Reordered Columns2", {"Location"}, DimLocation, {"Location"}, "DimLocation", JoinKind.LeftOuter),
+				    #"Expanded DimLocation" = Table.ExpandTableColumn(#"Merged Queries2", "DimLocation", {"LocationKey"}, {"LocationKey"}),
+				    #"Reordered Columns3" = Table.ReorderColumns(#"Expanded DimLocation",{"SalesHeaderKey", "OrderID", "CustomerKey", "DateKey", "OrderDate", "LocationKey", "Location", "OrderStatus", "LeadTime", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns3",{"Location"}),
+				    #"Sorted Rows" = Table.Sort(#"Removed Columns1",{{"SalesHeaderKey", Order.Ascending}}),
+				    #"Reordered Columns4" = Table.ReorderColumns(#"Sorted Rows",{"SalesHeaderKey", "OrderID", "DateKey", "CustomerKey", "LocationKey", "OrderDate", "OrderStatus", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount", "LeadTime"}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns4",{"LeadTime"}),
+				    #"Merged Queries3" = Table.NestedJoin(#"Removed Columns2", {"PaymentMethod"}, DimPaymentMethod, {"PaymentMethod"}, "DimPaymentMethod", JoinKind.LeftOuter),
+				    #"Expanded DimPaymentMethod" = Table.ExpandTableColumn(#"Merged Queries3", "DimPaymentMethod", {"PaymentMethodKey"}, {"PaymentMethodKey"}),
+				    #"Reordered Columns5" = Table.ReorderColumns(#"Expanded DimPaymentMethod",{"SalesHeaderKey", "OrderID", "DateKey", "CustomerKey", "LocationKey", "PaymentMethodKey", "PaymentMethod", "OrderDate", "OrderStatus", "TotalQuantity", "GrossAmount", "TotalDiscount", "TotalTax", "NetAmount"}),
+				    #"Removed Columns3" = Table.RemoveColumns(#"Reordered Columns5",{"PaymentMethod"})
+				in
+				    #"Removed Columns3"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

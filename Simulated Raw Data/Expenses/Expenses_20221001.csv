@@ -1,0 +1,25 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202210-001,Ingredients,1068.22,10/05/2022,Bulk Foods Ltd,Ingredients - October 2022
+EXP-202210-002,Raw Materials,1488.54,10/03/2022,Bulk Foods Ltd,Ingredients - October 2022
+EXP-202210-003,Ingredient Costs,1351.94,10/07/2022,Flour Suppliers Inc,Ingredients - October 2022
+EXP-202210-004,Raw Materials,1123.64,10/14/2022,Dairy Distributor,Ingredients - October 2022
+EXP-202210-005,Raw Materials,1400.92,10/14/2022,Dairy Distributor,Ingredients - October 2022
+EXP-202210-006,Raw Materials,1488.06,10/22/2022,Bulk Foods Ltd,Ingredients - October 2022
+EXP-202210-007,Ingredient Costs,1244.83,10/01/2022,Bulk Foods Ltd,Ingredients - October 2022
+EXP-202210-008,Raw Materials,1338.37,10/07/2022,Sugar & Spice Co,Ingredients - October 2022
+EXP-202210-009,Ingredients,1325.13,10/06/2022,Sugar & Spice Co,Ingredients - October 2022
+EXP-202210-010,Ingredients,1220.34,10/23/2022,Dairy Distributor,Ingredients - October 2022
+EXP-202210-011,Ingredient Costs,1044.07,10/13/2022,Sugar & Spice Co,Ingredients - October 2022
+EXP-202210-012,Ingredient Costs,1239.41,10/25/2022,Flour Suppliers Inc,Ingredients - October 2022
+EXP-202210-013,Labor,3126.28,10/07/2022,Payroll,Labor - October 2022
+EXP-202210-014,Labor,2760.77,10/13/2022,Payroll,Labor - October 2022
+EXP-202210-015,Payroll,2876.44,10/06/2022,Payroll,Labor - October 2022
+EXP-202210-016,Staff Costs,3213.5,10/04/2022,Payroll,Labor - October 2022
+EXP-202210-017,Rent & Utilities,5000.0,10/02/2022,Property Management,Rent & Utilities - October 2022
+EXP-202210-018,Marketing,690.32,10/16/2022,Print Media Inc,Marketing - October 2022
+EXP-202210-019,Marketing,746.78,10/10/2022,Digital Ads Co,Marketing - October 2022
+EXP-202210-020,Equipment,202.91,10/24/2022,Equipment Supplier,Equipment - October 2022
+EXP-202210-021,Equipment,240.82,10/09/2022,Equipment Supplier,Equipment - October 2022
+EXP-202210-022,Packaging,238.98,10/11/2022,Packaging Co,Packaging - October 2022
+EXP-202210-023,Packaging,222.83,10/22/2022,Packaging Co,Packaging - October 2022
+EXP-202210-024,Other,1066.1,10/15/2022,Various,Other - October 2022

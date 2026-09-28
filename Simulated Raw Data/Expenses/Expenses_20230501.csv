@@ -1,0 +1,31 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202305-001,Raw Materials,1252.14,05/12/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-002,Raw Materials,1202.11,05/25/2023,Flour Suppliers Inc,Ingredients - May 2023
+EXP-202305-003,Raw Materials,1118.89,05/19/2023,Dairy Distributor,Ingredients - May 2023
+EXP-202305-004,Raw Materials,1130.15,05/04/2023,Bulk Foods Ltd,Ingredients - May 2023
+EXP-202305-005,Ingredient Costs,995.36,05/08/2023,Bulk Foods Ltd,Ingredients - May 2023
+EXP-202305-006,Ingredients,999.98,05/15/2023,Flour Suppliers Inc,Ingredients - May 2023
+EXP-202305-007,Raw Materials,932.74,05/21/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-008,Ingredients,1007.56,05/26/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-009,Ingredient Costs,912.53,05/25/2023,Dairy Distributor,Ingredients - May 2023
+EXP-202305-010,Raw Materials,1338.08,05/26/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-011,Ingredient Costs,1100.06,05/11/2023,Flour Suppliers Inc,Ingredients - May 2023
+EXP-202305-012,Ingredients,1215.19,05/18/2023,Flour Suppliers Inc,Ingredients - May 2023
+EXP-202305-013,Ingredients,982.12,05/18/2023,Bulk Foods Ltd,Ingredients - May 2023
+EXP-202305-014,Raw Materials,1074.33,05/02/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-015,Raw Materials,1255.66,05/17/2023,Sugar & Spice Co,Ingredients - May 2023
+EXP-202305-016,Payroll,4036.57,05/07/2023,Payroll,Labor - May 2023
+EXP-202305-017,Labor,4627.39,05/24/2023,Payroll,Labor - May 2023
+EXP-202305-018,Staff Costs,4694.88,05/12/2023,Payroll,Labor - May 2023
+EXP-202305-019,Utilities,5000.0,05/02/2023,Utility Company,Rent & Utilities - May 2023
+EXP-202305-020,Marketing,423.07,05/26/2023,Digital Ads Co,Marketing - May 2023
+EXP-202305-021,Marketing,351.27,05/03/2023,Digital Ads Co,Marketing - May 2023
+EXP-202305-022,Marketing & Advertising,394.76,05/06/2023,Social Media Agency,Marketing - May 2023
+EXP-202305-023,Marketing & Advertising,359.36,05/08/2023,Digital Ads Co,Marketing - May 2023
+EXP-202305-024,Equipment,177.97,05/12/2023,Equipment Supplier,Equipment - May 2023
+EXP-202305-025,Equipment,191.95,05/13/2023,Equipment Supplier,Equipment - May 2023
+EXP-202305-026,Equipment,184.97,05/18/2023,Equipment Supplier,Equipment - May 2023
+EXP-202305-027,Packaging,226.15,05/11/2023,Packaging Co,Packaging - May 2023
+EXP-202305-028,Packaging,280.37,05/10/2023,Packaging Co,Packaging - May 2023
+EXP-202305-029,Other,493.86,05/23/2023,Various,Other - May 2023
+EXP-202305-030,Other,464.21,05/23/2023,Various,Other - May 2023

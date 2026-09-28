@@ -1,0 +1,37 @@
+table 'Payment Aging Categories'
+	lineageTag: 7aa266c6-fa86-45d6-be9f-8ae8827cf052
+
+	column AgingBucket
+		lineageTag: 589438b1-3aa7-4cfd-9253-a49ece45ff47
+		summarizeBy: none
+		isNameInferred
+		sourceColumn: [AgingBucket]
+
+		annotation SummarizationSetBy = Automatic
+
+	column SortOrder
+		formatString: 0
+		lineageTag: 9e3c1a1c-5a9c-4273-aab5-073356e65437
+		summarizeBy: sum
+		isNameInferred
+		sourceColumn: [SortOrder]
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Payment Aging Categories' = calculated
+		mode: import
+		source =
+				
+				DATATABLE(
+				    "AgingBucket", STRING,
+				    "SortOrder", INTEGER,
+				    {
+				        {"0-15 Days", 1},
+				        {"16-30 Days", 2},
+				        {"31-60 Days", 3},
+				        {"60+ Days", 4}
+				    }
+				)
+
+	annotation PBI_Id = e64a7b63f9774157a931cdf70754d3fc
+

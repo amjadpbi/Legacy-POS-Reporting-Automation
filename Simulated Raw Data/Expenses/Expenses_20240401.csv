@@ -1,0 +1,30 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202404-001,Raw Materials,1222.31,04/14/2024,Flour Suppliers Inc,Ingredients - April 2024
+EXP-202404-002,Ingredients,1002.28,04/25/2024,Flour Suppliers Inc,Ingredients - April 2024
+EXP-202404-003,Raw Materials,963.06,04/12/2024,Flour Suppliers Inc,Ingredients - April 2024
+EXP-202404-004,Ingredient Costs,1032.63,04/13/2024,Sugar & Spice Co,Ingredients - April 2024
+EXP-202404-005,Ingredients,1022.96,04/22/2024,Bulk Foods Ltd,Ingredients - April 2024
+EXP-202404-006,Ingredient Costs,1088.6,04/13/2024,Flour Suppliers Inc,Ingredients - April 2024
+EXP-202404-007,Raw Materials,1014.0,04/01/2024,Dairy Distributor,Ingredients - April 2024
+EXP-202404-008,Ingredients,1143.73,04/23/2024,Sugar & Spice Co,Ingredients - April 2024
+EXP-202404-009,Ingredient Costs,1218.23,04/25/2024,Dairy Distributor,Ingredients - April 2024
+EXP-202404-010,Ingredient Costs,1402.57,04/23/2024,Sugar & Spice Co,Ingredients - April 2024
+EXP-202404-011,Raw Materials,1396.06,04/08/2024,Bulk Foods Ltd,Ingredients - April 2024
+EXP-202404-012,Ingredients,1168.59,04/21/2024,Flour Suppliers Inc,Ingredients - April 2024
+EXP-202404-013,Raw Materials,977.08,04/18/2024,Dairy Distributor,Ingredients - April 2024
+EXP-202404-014,Ingredients,1343.81,04/19/2024,Sugar & Spice Co,Ingredients - April 2024
+EXP-202404-015,Ingredients,1244.72,04/24/2024,Bulk Foods Ltd,Ingredients - April 2024
+EXP-202404-016,Payroll,3881.78,04/18/2024,Payroll,Labor - April 2024
+EXP-202404-017,Labor,3700.04,04/15/2024,Payroll,Labor - April 2024
+EXP-202404-018,Payroll,3429.81,04/01/2024,Payroll,Labor - April 2024
+EXP-202404-019,Labor,3623.4,04/20/2024,Payroll,Labor - April 2024
+EXP-202404-020,Rent & Utilities,5000.0,04/02/2024,Property Management,Rent & Utilities - April 2024
+EXP-202404-021,Utilities,2500.0,04/16/2024,Utility Company,Rent & Utilities - April 2024
+EXP-202404-022,Marketing,804.01,04/08/2024,Print Media Inc,Marketing - April 2024
+EXP-202404-023,Marketing & Advertising,763.94,04/13/2024,Social Media Agency,Marketing - April 2024
+EXP-202404-024,Equipment,345.75,04/01/2024,Equipment Supplier,Equipment - April 2024
+EXP-202404-025,Equipment,292.39,04/24/2024,Equipment Supplier,Equipment - April 2024
+EXP-202404-026,Packaging,633.91,04/03/2024,Packaging Co,Packaging - April 2024
+EXP-202404-027,Other,464.03,04/19/2024,Various,Other - April 2024
+EXP-202404-028,Other,433.39,04/08/2024,Various,Other - April 2024
+EXP-202404-029,Other,321.31,04/10/2024,Various,Other - April 2024

@@ -1,0 +1,25 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202208-001,Ingredients,1175.84,08/07/2022,Sugar & Spice Co,Ingredients - August 2022
+EXP-202208-002,Raw Materials,1139.35,08/16/2022,Dairy Distributor,Ingredients - August 2022
+EXP-202208-003,Raw Materials,1058.0,08/10/2022,Dairy Distributor,Ingredients - August 2022
+EXP-202208-004,Raw Materials,1292.89,08/24/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-005,Ingredients,924.92,08/08/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-006,Ingredient Costs,1032.92,08/07/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-007,Raw Materials,1178.34,08/01/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-008,Ingredient Costs,1036.99,08/19/2022,Dairy Distributor,Ingredients - August 2022
+EXP-202208-009,Ingredients,1347.14,08/07/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-010,Raw Materials,1377.49,08/15/2022,Dairy Distributor,Ingredients - August 2022
+EXP-202208-011,Raw Materials,1178.96,08/21/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-012,Ingredient Costs,1207.53,08/16/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-013,Ingredients,973.94,08/03/2022,Bulk Foods Ltd,Ingredients - August 2022
+EXP-202208-014,Payroll,6253.97,08/10/2022,Payroll,Labor - August 2022
+EXP-202208-015,Staff Costs,6256.98,08/04/2022,Payroll,Labor - August 2022
+EXP-202208-016,Utilities,5000.0,08/02/2022,Utility Company,Rent & Utilities - August 2022
+EXP-202208-017,Utilities,2500.0,08/16/2022,Utility Company,Rent & Utilities - August 2022
+EXP-202208-018,Marketing,516.92,08/05/2022,Print Media Inc,Marketing - August 2022
+EXP-202208-019,Marketing,559.84,08/14/2022,Print Media Inc,Marketing - August 2022
+EXP-202208-020,Marketing,594.47,08/01/2022,Print Media Inc,Marketing - August 2022
+EXP-202208-021,Equipment,465.83,08/08/2022,Equipment Supplier,Equipment - August 2022
+EXP-202208-022,Packaging,207.26,08/04/2022,Packaging Co,Packaging - August 2022
+EXP-202208-023,Packaging,232.51,08/10/2022,Packaging Co,Packaging - August 2022
+EXP-202208-024,Other,1197.98,08/17/2022,Various,Other - August 2022

@@ -1,0 +1,59 @@
+table DimLocation
+	lineageTag: b694c1a7-ed31-4355-a0ca-3efdcc9bac06
+
+	column LocationKey
+		dataType: string
+		isHidden
+		lineageTag: 324efe88-7568-4821-a72f-1f5d148bb1d1
+		summarizeBy: none
+		sourceColumn: LocationKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Location
+		dataType: string
+		lineageTag: 2de56540-1174-448d-be50-11f46370ac1e
+		summarizeBy: none
+		sourceColumn: Location
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimLocation = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source =
+				let
+				    Source = stgSales_Combined,
+				
+				    #"Removed Columns" = Table.RemoveColumns(
+				        Source,
+				        {"Name","OrderID","CustomerID","ProductID","OrderDate","Quantity","UnitPrice","Discount","Tax","PaymentMethod","LeadTime","OrderStatus"}
+				    ),
+				
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns"),
+				
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index","Location"}),
+				
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Index","LocationKey"}}),
+				
+				    // Add Unknown row
+				    UnknownRow = #table(
+				        {"LocationKey","Location"},
+				        {{-1,"Unknown"}}
+				    ),
+				
+				    // Combine with existing table
+				    Combined = Table.Combine({UnknownRow, #"Renamed Columns"})
+				in
+				    Combined
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Exception
+

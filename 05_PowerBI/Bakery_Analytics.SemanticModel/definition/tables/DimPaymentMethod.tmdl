@@ -1,0 +1,73 @@
+table DimPaymentMethod
+	lineageTag: 398a0994-c747-4c4c-9d71-6c4856bb4edc
+
+	column PaymentMethod
+		dataType: string
+		lineageTag: aeba68d7-10b4-422e-951e-6ecb183182be
+		summarizeBy: none
+		sourceColumn: PaymentMethod
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 8e34b836-b2c4-481d-8310-2b1ce6971ee5
+		summarizeBy: none
+		sourceColumn: PaymentMethodKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ProcessingFeeRate
+		dataType: decimal
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		lineageTag: 108ef66e-4ca0-4529-8a7a-5e2d1658bea1
+		summarizeBy: sum
+		sourceColumn: ProcessingFeeRate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	column IsActive
+		dataType: string
+		lineageTag: a956fd3a-bcc4-4e8d-8342-ae81f22fed8f
+		summarizeBy: none
+		sourceColumn: IsActive
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimPaymentMethod = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source =
+				let
+				    Source = #table(
+				        {"PaymentMethodKey", "PaymentMethod", "ProcessingFeeRate", "IsActive"},
+				        {
+				            {1, "Cash", 0.00, "Yes"},
+				            {2, "Credit Card", 0.025, "Yes"},
+				            {3, "AfterPay", 0.025, "Yes"},
+				            {4, "Shopify", 0.029, "Yes"},
+				            {5, "On Account", 0.00, "Yes"},
+				            {-1, "Unknown", 0.00, "No"}
+				        }
+				    ),
+				
+				    #"Changed Type" = Table.TransformColumnTypes(Source,{{"PaymentMethodKey", Int64.Type}, {"PaymentMethod", type text}, {"ProcessingFeeRate", Currency.Type}, {"IsActive", type text}})
+				in
+				    #"Changed Type"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

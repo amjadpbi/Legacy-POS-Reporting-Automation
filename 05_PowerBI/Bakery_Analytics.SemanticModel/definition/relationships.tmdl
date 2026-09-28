@@ -1,0 +1,45 @@
+relationship AutoDetected_fdefa621-7e6c-4a67-b7d6-94b9209d4bc0
+	fromColumn: FactExpense.ExpCategoryKey
+	toColumn: DimExpCategory.ExpCategoryKey
+
+relationship AutoDetected_2051b95c-6531-4081-bf9e-d8555fe4d110
+	fromColumn: FactExpense.DateKey
+	toColumn: DimDate.DateKey
+
+relationship 1f60e099-ef59-0f1c-838f-bab2e2e4dae8
+	fromColumn: FactPayment.DateKey
+	toColumn: DimDate.DateKey
+
+relationship 629a9fff-e65d-3055-f45f-b4b0508f2db2
+	fromColumn: FactSalesHeader.PaymentMethodKey
+	toColumn: DimPaymentMethod.PaymentMethodKey
+
+relationship e2e13db1-91f7-2fb4-0702-0716bb51bc7c
+	fromColumn: FactSalesHeader.LocationKey
+	toColumn: DimLocation.LocationKey
+
+relationship 267c6a04-1d18-daa5-540b-7f9277cf6134
+	fromColumn: FactSalesHeader.CustomerKey
+	toColumn: DimCustomer.CustomerKey
+
+relationship 50639fff-b93a-10f5-e984-c9b6286257fc
+	fromColumn: FactSalesLine.ProductKey
+	toColumn: DimProduct.ProductKey
+
+relationship be52c9fa-422c-b6f4-ad8e-ba79a5d09d08
+	fromColumn: FactSalesHeader.DateKey
+	toColumn: DimDate.DateKey
+
+relationship 64f05415-2f8c-edcc-985a-a6d9fd722074
+	fromColumn: FactSalesHeader.SalesHeaderKey
+	toColumn: FactSalesLine.SalesHeaderKey
+
+relationship 929265d4-0071-2c46-f082-fbfb0941c2c2
+	fromColumn: FactPayment.PaymentMethodKey
+	toColumn: DimPaymentMethod.PaymentMethodKey
+
+relationship aa008d37-80bb-cebf-bc6f-72c123ee07da
+	isActive: false
+	fromColumn: FactSalesLine.DateKey
+	toColumn: DimDate.DateKey
+

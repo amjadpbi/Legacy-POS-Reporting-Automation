@@ -1,0 +1,29 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202207-001,Raw Materials,980.37,07/22/2022,Dairy Distributor,Ingredients - July 2022
+EXP-202207-002,Ingredients,1382.66,07/07/2022,Dairy Distributor,Ingredients - July 2022
+EXP-202207-003,Ingredients,1265.89,07/07/2022,Bulk Foods Ltd,Ingredients - July 2022
+EXP-202207-004,Raw Materials,1100.8,07/17/2022,Flour Suppliers Inc,Ingredients - July 2022
+EXP-202207-005,Ingredient Costs,1349.84,07/10/2022,Bulk Foods Ltd,Ingredients - July 2022
+EXP-202207-006,Ingredient Costs,1354.15,07/04/2022,Dairy Distributor,Ingredients - July 2022
+EXP-202207-007,Raw Materials,978.67,07/03/2022,Bulk Foods Ltd,Ingredients - July 2022
+EXP-202207-008,Ingredients,1112.62,07/06/2022,Bulk Foods Ltd,Ingredients - July 2022
+EXP-202207-009,Ingredient Costs,1323.71,07/22/2022,Flour Suppliers Inc,Ingredients - July 2022
+EXP-202207-010,Raw Materials,968.7,07/06/2022,Bulk Foods Ltd,Ingredients - July 2022
+EXP-202207-011,Ingredient Costs,1084.28,07/20/2022,Dairy Distributor,Ingredients - July 2022
+EXP-202207-012,Ingredients,1062.68,07/17/2022,Flour Suppliers Inc,Ingredients - July 2022
+EXP-202207-013,Raw Materials,1214.75,07/25/2022,Sugar & Spice Co,Ingredients - July 2022
+EXP-202207-014,Staff Costs,3818.48,07/01/2022,Payroll,Labor - July 2022
+EXP-202207-015,Payroll,3972.98,07/21/2022,Payroll,Labor - July 2022
+EXP-202207-016,Payroll,3643.16,07/10/2022,Payroll,Labor - July 2022
+EXP-202207-017,Utilities,5000.0,07/02/2022,Utility Company,Rent & Utilities - July 2022
+EXP-202207-018,Marketing & Advertising,417.61,07/18/2022,Digital Ads Co,Marketing - July 2022
+EXP-202207-019,Marketing & Advertising,475.81,07/04/2022,Digital Ads Co,Marketing - July 2022
+EXP-202207-020,Marketing,476.66,07/25/2022,Digital Ads Co,Marketing - July 2022
+EXP-202207-021,Equipment,141.69,07/17/2022,Equipment Supplier,Equipment - July 2022
+EXP-202207-022,Equipment,196.9,07/17/2022,Equipment Supplier,Equipment - July 2022
+EXP-202207-023,Equipment,164.44,07/11/2022,Equipment Supplier,Equipment - July 2022
+EXP-202207-024,Packaging,185.06,07/15/2022,Packaging Co,Packaging - July 2022
+EXP-202207-025,Packaging,145.95,07/05/2022,Packaging Co,Packaging - July 2022
+EXP-202207-026,Packaging,148.47,07/13/2022,Packaging Co,Packaging - July 2022
+EXP-202207-027,Other,466.09,07/05/2022,Various,Other - July 2022
+EXP-202207-028,Other,473.77,07/01/2022,Various,Other - July 2022

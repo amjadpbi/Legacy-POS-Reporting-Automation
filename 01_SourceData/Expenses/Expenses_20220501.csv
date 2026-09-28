@@ -1,0 +1,26 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202205-001,Raw Materials,978.56,05/17/2022,Flour Suppliers Inc,Ingredients - May 2022
+EXP-202205-002,Ingredients,1159.21,05/18/2022,Sugar & Spice Co,Ingredients - May 2022
+EXP-202205-003,Ingredient Costs,971.54,05/05/2022,Sugar & Spice Co,Ingredients - May 2022
+EXP-202205-004,Ingredients,1042.76,05/06/2022,Dairy Distributor,Ingredients - May 2022
+EXP-202205-005,Ingredient Costs,1182.19,05/18/2022,Flour Suppliers Inc,Ingredients - May 2022
+EXP-202205-006,Ingredients,846.84,05/06/2022,Bulk Foods Ltd,Ingredients - May 2022
+EXP-202205-007,Raw Materials,1058.88,05/01/2022,Bulk Foods Ltd,Ingredients - May 2022
+EXP-202205-008,Ingredient Costs,913.48,05/20/2022,Dairy Distributor,Ingredients - May 2022
+EXP-202205-009,Ingredients,1009.28,05/07/2022,Bulk Foods Ltd,Ingredients - May 2022
+EXP-202205-010,Ingredient Costs,1052.33,05/24/2022,Dairy Distributor,Ingredients - May 2022
+EXP-202205-011,Raw Materials,1142.23,05/08/2022,Sugar & Spice Co,Ingredients - May 2022
+EXP-202205-012,Ingredients,968.25,05/06/2022,Bulk Foods Ltd,Ingredients - May 2022
+EXP-202205-013,Raw Materials,1088.29,05/26/2022,Bulk Foods Ltd,Ingredients - May 2022
+EXP-202205-014,Ingredients,964.08,05/23/2022,Flour Suppliers Inc,Ingredients - May 2022
+EXP-202205-015,Raw Materials,892.18,05/16/2022,Sugar & Spice Co,Ingredients - May 2022
+EXP-202205-016,Staff Costs,6154.25,05/16/2022,Payroll,Labor - May 2022
+EXP-202205-017,Payroll,6449.52,05/14/2022,Payroll,Labor - May 2022
+EXP-202205-018,Rent & Utilities,5000.0,05/02/2022,Property Management,Rent & Utilities - May 2022
+EXP-202205-019,Marketing & Advertising,451.47,05/08/2022,Digital Ads Co,Marketing - May 2022
+EXP-202205-020,Marketing & Advertising,466.37,05/15/2022,Digital Ads Co,Marketing - May 2022
+EXP-202205-021,Marketing & Advertising,421.56,05/06/2022,Social Media Agency,Marketing - May 2022
+EXP-202205-022,Equipment,578.08,05/13/2022,Equipment Supplier,Equipment - May 2022
+EXP-202205-023,Packaging,285.08,05/18/2022,Packaging Co,Packaging - May 2022
+EXP-202205-024,Packaging,289.35,05/03/2022,Packaging Co,Packaging - May 2022
+EXP-202205-025,Other,1110.06,05/17/2022,Various,Other - May 2022

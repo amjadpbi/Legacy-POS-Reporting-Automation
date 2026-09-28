@@ -1,0 +1,169 @@
+table FactPayment
+	lineageTag: f6ce1901-1571-47a9-86f7-31bc64e4b798
+
+	column PaymentID
+		dataType: string
+		lineageTag: 70675b95-39a4-4b56-b4d3-91f4b2d9aa0e
+		summarizeBy: none
+		sourceColumn: PaymentID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column SalesOrderID
+		dataType: string
+		lineageTag: 7ce06b2b-2e6b-4a99-8bd4-1580d70f8074
+		summarizeBy: none
+		sourceColumn: SalesOrderID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentAmount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f34cbf07-0c53-4596-95b5-638425fd2808
+		summarizeBy: sum
+		sourceColumn: PaymentAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentDate
+		dataType: dateTime
+		formatString: dd/mm/yyyy
+		lineageTag: 4829376e-df0d-4e8d-9487-d28c95afdb48
+		summarizeBy: none
+		sourceColumn: PaymentDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+		annotation PBI_FormatHint = {"isDateTimeCustom":true}
+
+	column PaymentStatus
+		dataType: string
+		lineageTag: 9905616e-a56a-4f86-bf52-699dd9d31305
+		summarizeBy: none
+		sourceColumn: PaymentStatus
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column FeeAmount
+		dataType: decimal
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		lineageTag: f7aa394c-8653-492c-919b-4a9a0cda8266
+		summarizeBy: sum
+		sourceColumn: FeeAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ReconciliationDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 43a73297-41f1-411b-9f4b-d6d9f0397d6d
+		summarizeBy: none
+		sourceColumn: ReconciliationDate
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	column IsReconciled
+		dataType: boolean
+		formatString: """TRUE"";""TRUE"";""FALSE"""
+		lineageTag: 370931c9-bb2c-4ff1-9849-5c23e555bdec
+		summarizeBy: none
+		sourceColumn: IsReconciled
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 5ac6a3f7-ba74-4739-a2ae-ed539e0bdaa3
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentMethodKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: cda34d24-f553-4cb3-aa95-a4e797a90ee6
+		summarizeBy: none
+		sourceColumn: PaymentMethodKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column PaymentKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 0a94ba38-43bf-4843-8f38-e98ccb31f993
+		summarizeBy: count
+		sourceColumn: PaymentKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Days Outstanding' =
+			
+			IF(
+			    FactPayment[PaymentStatus] IN {"Pending", "Failed"},
+			    DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY),
+			    BLANK()
+			)
+		formatString: 0
+		lineageTag: 13891fbd-1e45-413a-be04-14fccf24229e
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	partition FactPayment = m
+		mode: import
+		queryGroup: '9_Fact Tables'
+		source =
+				let
+				    Source = stgPayments_Combined,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"SourceFileName"}),
+				    #"Merged Queries" = Table.NestedJoin(#"Removed Columns", {"PaymentMethod"}, DimPaymentMethod, {"PaymentMethod"}, "DimPaymentMethod", JoinKind.LeftOuter),
+				    #"Expanded DimPaymentMethod" = Table.ExpandTableColumn(#"Merged Queries", "DimPaymentMethod", {"PaymentMethodKey"}, {"PaymentMethodKey"}),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Expanded DimPaymentMethod",{"PaymentID", "SalesOrderID", "PaymentAmount", "PaymentDate", "PaymentStatus", "PaymentMethod", "PaymentMethodKey", "FeeAmount", "ReconciliationDate", "IsReconciled", "LoadDateTime"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns",{"PaymentMethod"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns1", {"PaymentDate"}, DimDate, {"Date"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Merged Queries1", "DimDate", {"DateKey"}, {"DateKey"}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Expanded DimDate",{"PaymentID", "SalesOrderID", "PaymentAmount", "DateKey", "PaymentDate", "PaymentMethodKey", "PaymentStatus", "FeeAmount", "ReconciliationDate", "IsReconciled", "LoadDateTime"}),
+				    #"Added Index" = Table.AddIndexColumn(#"Reordered Columns1", "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Added Index",{"Index", "PaymentID", "SalesOrderID", "PaymentAmount", "DateKey", "PaymentDate", "PaymentMethodKey", "PaymentStatus", "FeeAmount", "ReconciliationDate", "IsReconciled", "LoadDateTime"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns2",{{"Index", "PaymentKey"}}),
+				    #"Reordered Columns3" = Table.ReorderColumns(#"Renamed Columns",{"PaymentKey", "PaymentID", "SalesOrderID", "DateKey", "PaymentMethodKey", "PaymentAmount", "PaymentDate", "PaymentStatus", "FeeAmount", "ReconciliationDate", "IsReconciled", "LoadDateTime"}),
+				    #"Removed Columns2" = Table.RemoveColumns(#"Reordered Columns3",{"LoadDateTime"})
+				in
+				    #"Removed Columns2"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

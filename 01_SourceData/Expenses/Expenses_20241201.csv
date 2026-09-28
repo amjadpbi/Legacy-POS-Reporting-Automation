@@ -1,0 +1,27 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202412-001,Ingredients,1484.06,12/13/2024,Sugar & Spice Co,Ingredients - December 2024
+EXP-202412-002,Raw Materials,1373.79,12/07/2024,Sugar & Spice Co,Ingredients - December 2024
+EXP-202412-003,Ingredient Costs,1810.53,12/25/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-004,Ingredient Costs,1537.09,12/18/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-005,Ingredient Costs,1476.26,12/15/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-006,Ingredients,1632.59,12/13/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-007,Ingredient Costs,1390.23,12/09/2024,Bulk Foods Ltd,Ingredients - December 2024
+EXP-202412-008,Raw Materials,1934.88,12/18/2024,Dairy Distributor,Ingredients - December 2024
+EXP-202412-009,Ingredients,1447.72,12/11/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-010,Ingredient Costs,1516.74,12/13/2024,Dairy Distributor,Ingredients - December 2024
+EXP-202412-011,Ingredient Costs,1627.07,12/20/2024,Flour Suppliers Inc,Ingredients - December 2024
+EXP-202412-012,Ingredient Costs,1542.53,12/09/2024,Dairy Distributor,Ingredients - December 2024
+EXP-202412-013,Labor,4801.67,12/17/2024,Payroll,Labor - December 2024
+EXP-202412-014,Payroll,4906.11,12/07/2024,Payroll,Labor - December 2024
+EXP-202412-015,Staff Costs,4597.62,12/12/2024,Payroll,Labor - December 2024
+EXP-202412-016,Utilities,5000.0,12/02/2024,Utility Company,Rent & Utilities - December 2024
+EXP-202412-017,Marketing & Advertising,638.12,12/25/2024,Print Media Inc,Marketing - December 2024
+EXP-202412-018,Marketing,660.83,12/07/2024,Print Media Inc,Marketing - December 2024
+EXP-202412-019,Marketing,663.18,12/18/2024,Print Media Inc,Marketing - December 2024
+EXP-202412-020,Equipment,503.94,12/09/2024,Equipment Supplier,Equipment - December 2024
+EXP-202412-021,Packaging,162.21,12/10/2024,Packaging Co,Packaging - December 2024
+EXP-202412-022,Packaging,189.35,12/12/2024,Packaging Co,Packaging - December 2024
+EXP-202412-023,Packaging,182.62,12/05/2024,Packaging Co,Packaging - December 2024
+EXP-202412-024,Other,400.95,12/12/2024,Various,Other - December 2024
+EXP-202412-025,Other,378.75,12/09/2024,Various,Other - December 2024
+EXP-202412-026,Other,395.39,12/24/2024,Various,Other - December 2024

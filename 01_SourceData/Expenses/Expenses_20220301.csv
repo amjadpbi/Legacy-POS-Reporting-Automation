@@ -1,0 +1,29 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202203-001,Raw Materials,938.11,03/11/2022,Flour Suppliers Inc,Ingredients - March 2022
+EXP-202203-002,Raw Materials,1117.82,03/01/2022,Bulk Foods Ltd,Ingredients - March 2022
+EXP-202203-003,Ingredients,1163.75,03/11/2022,Flour Suppliers Inc,Ingredients - March 2022
+EXP-202203-004,Ingredient Costs,1179.07,03/02/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-005,Ingredient Costs,1064.89,03/18/2022,Flour Suppliers Inc,Ingredients - March 2022
+EXP-202203-006,Ingredient Costs,1059.85,03/10/2022,Bulk Foods Ltd,Ingredients - March 2022
+EXP-202203-007,Ingredient Costs,864.93,03/02/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-008,Ingredient Costs,1041.11,03/09/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-009,Ingredients,974.1,03/03/2022,Dairy Distributor,Ingredients - March 2022
+EXP-202203-010,Raw Materials,1011.71,03/15/2022,Flour Suppliers Inc,Ingredients - March 2022
+EXP-202203-011,Ingredient Costs,1186.67,03/18/2022,Bulk Foods Ltd,Ingredients - March 2022
+EXP-202203-012,Ingredient Costs,1103.8,03/24/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-013,Ingredients,906.01,03/04/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-014,Raw Materials,954.5,03/08/2022,Sugar & Spice Co,Ingredients - March 2022
+EXP-202203-015,Raw Materials,884.05,03/07/2022,Dairy Distributor,Ingredients - March 2022
+EXP-202203-016,Staff Costs,5441.31,03/24/2022,Payroll,Labor - March 2022
+EXP-202203-017,Payroll,6495.38,03/11/2022,Payroll,Labor - March 2022
+EXP-202203-018,Utilities,5000.0,03/02/2022,Utility Company,Rent & Utilities - March 2022
+EXP-202203-019,Marketing & Advertising,705.76,03/03/2022,Digital Ads Co,Marketing - March 2022
+EXP-202203-020,Marketing & Advertising,732.36,03/09/2022,Print Media Inc,Marketing - March 2022
+EXP-202203-021,Equipment,133.79,03/09/2022,Equipment Supplier,Equipment - March 2022
+EXP-202203-022,Equipment,167.35,03/05/2022,Equipment Supplier,Equipment - March 2022
+EXP-202203-023,Equipment,189.57,03/20/2022,Equipment Supplier,Equipment - March 2022
+EXP-202203-024,Packaging,142.19,03/19/2022,Packaging Co,Packaging - March 2022
+EXP-202203-025,Packaging,139.22,03/26/2022,Packaging Co,Packaging - March 2022
+EXP-202203-026,Packaging,166.69,03/16/2022,Packaging Co,Packaging - March 2022
+EXP-202203-027,Other,567.26,03/11/2022,Various,Other - March 2022
+EXP-202203-028,Other,588.17,03/14/2022,Various,Other - March 2022

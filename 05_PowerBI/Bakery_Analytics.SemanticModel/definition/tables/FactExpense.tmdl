@@ -1,0 +1,122 @@
+table FactExpense
+	lineageTag: ebaa2114-8053-44a1-b670-22dffed2f91b
+
+	column ExpenseKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 6a51cb99-5fb8-440d-82e2-82631229d89d
+		summarizeBy: count
+		sourceColumn: ExpenseKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseID
+		dataType: string
+		isHidden
+		lineageTag: dc24be83-0ede-4c04-8e77-3646249f0674
+		summarizeBy: none
+		sourceColumn: ExpenseID
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: e6b38c68-86c3-4be9-b13c-b585feddda8c
+		summarizeBy: none
+		sourceColumn: ExpCategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseAmount
+		dataType: decimal
+		lineageTag: 75d801e7-1be0-467c-a6b9-a07ce9aea77e
+		summarizeBy: sum
+		sourceColumn: ExpenseAmount
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	column VendorName
+		dataType: string
+		lineageTag: 3c9d5a96-7621-4ff1-831b-c612d603ad4d
+		summarizeBy: none
+		sourceColumn: VendorName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: b0d1b946-6021-4ff6-af57-4eb08b4ac3e1
+		summarizeBy: none
+		sourceColumn: Description
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column DateKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 77c5648f-a30f-4555-b31e-ec8fc3e76f08
+		summarizeBy: none
+		sourceColumn: DateKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column ExpenseDate
+		dataType: dateTime
+		formatString: Long Date
+		lineageTag: 11d9f46b-e928-41b2-a245-4d7add70e825
+		summarizeBy: none
+		sourceColumn: ExpenseDate
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
+
+	partition FactExpense = m
+		mode: import
+		queryGroup: '9_Fact Tables'
+		source =
+				let
+				    Source = stgExpenses,
+				    #"Added Index" = Table.AddIndexColumn(Source, "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "ExpenseID", "CategoryName", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Index", "ExpenseKey"}}),
+				    #"Merged Queries" = Table.NestedJoin(#"Renamed Columns", {"CategoryName"}, DimExpCategory, {"CategoryName"}, "DimExpCategory", JoinKind.LeftOuter),
+				    #"Expanded DimExpCategory" = Table.ExpandTableColumn(#"Merged Queries", "DimExpCategory", {"ExpCategoryKey"}, {"ExpCategoryKey"}),
+				    #"Reordered Columns1" = Table.ReorderColumns(#"Expanded DimExpCategory",{"ExpenseKey", "ExpenseID", "CategoryName", "ExpCategoryKey", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"}),
+				    #"Removed Columns" = Table.RemoveColumns(#"Reordered Columns1",{"CategoryName"}),
+				    #"Merged Queries1" = Table.NestedJoin(#"Removed Columns", {"ExpenseDate"}, DimDate, {"Date"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimDate" = Table.ExpandTableColumn(#"Merged Queries1", "DimDate", {"DateKey"}, {"DateKey"}),
+				    #"Reordered Columns2" = Table.ReorderColumns(#"Expanded DimDate",{"ExpenseKey", "ExpenseID", "DateKey", "ExpCategoryKey", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"}),
+				    #"Removed Columns1" = Table.RemoveColumns(#"Reordered Columns2",{"ExpenseDate"}),
+				    #"Changed Type" = Table.TransformColumnTypes(#"Removed Columns1",{{"ExpenseAmount", Currency.Type}}),
+				    #"Merged Queries2" = Table.NestedJoin(#"Changed Type", {"DateKey"}, DimDate, {"DateKey"}, "DimDate", JoinKind.LeftOuter),
+				    #"Expanded DimDate1" = Table.ExpandTableColumn(#"Merged Queries2", "DimDate", {"Date"}, {"Date"}),
+				    #"Reordered Columns3" = Table.ReorderColumns(#"Expanded DimDate1",{"ExpenseKey", "ExpenseID", "DateKey", "Date", "ExpCategoryKey", "ExpenseAmount", "VendorName", "Description"}),
+				    #"Renamed Columns1" = Table.RenameColumns(#"Reordered Columns3",{{"Date", "ExpenseDate"}})
+				in
+				    #"Renamed Columns1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

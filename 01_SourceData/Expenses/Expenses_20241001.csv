@@ -1,0 +1,32 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202410-001,Ingredients,1176.29,10/22/2024,Flour Suppliers Inc,Ingredients - October 2024
+EXP-202410-002,Ingredients,832.64,10/01/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-003,Raw Materials,869.21,10/02/2024,Bulk Foods Ltd,Ingredients - October 2024
+EXP-202410-004,Ingredients,990.66,10/16/2024,Sugar & Spice Co,Ingredients - October 2024
+EXP-202410-005,Ingredient Costs,857.29,10/04/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-006,Ingredient Costs,866.42,10/23/2024,Sugar & Spice Co,Ingredients - October 2024
+EXP-202410-007,Raw Materials,884.56,10/05/2024,Bulk Foods Ltd,Ingredients - October 2024
+EXP-202410-008,Ingredients,1049.42,10/19/2024,Bulk Foods Ltd,Ingredients - October 2024
+EXP-202410-009,Raw Materials,1085.06,10/19/2024,Sugar & Spice Co,Ingredients - October 2024
+EXP-202410-010,Ingredients,1000.98,10/21/2024,Flour Suppliers Inc,Ingredients - October 2024
+EXP-202410-011,Ingredients,968.38,10/06/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-012,Ingredient Costs,1167.92,10/23/2024,Sugar & Spice Co,Ingredients - October 2024
+EXP-202410-013,Ingredient Costs,1100.65,10/26/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-014,Raw Materials,972.9,10/15/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-015,Ingredients,896.31,10/09/2024,Dairy Distributor,Ingredients - October 2024
+EXP-202410-016,Ingredient Costs,1099.51,10/11/2024,Bulk Foods Ltd,Ingredients - October 2024
+EXP-202410-017,Raw Materials,836.32,10/02/2024,Bulk Foods Ltd,Ingredients - October 2024
+EXP-202410-018,Ingredients,881.75,10/21/2024,Flour Suppliers Inc,Ingredients - October 2024
+EXP-202410-019,Staff Costs,7448.09,10/11/2024,Payroll,Labor - October 2024
+EXP-202410-020,Staff Costs,6972.92,10/03/2024,Payroll,Labor - October 2024
+EXP-202410-021,Rent & Utilities,5000.0,10/02/2024,Property Management,Rent & Utilities - October 2024
+EXP-202410-022,Rent & Utilities,2500.0,10/16/2024,Property Management,Rent & Utilities - October 2024
+EXP-202410-023,Marketing & Advertising,607.52,10/22/2024,Digital Ads Co,Marketing - October 2024
+EXP-202410-024,Marketing,578.55,10/13/2024,Digital Ads Co,Marketing - October 2024
+EXP-202410-025,Marketing & Advertising,649.56,10/07/2024,Print Media Inc,Marketing - October 2024
+EXP-202410-026,Equipment,315.16,10/11/2024,Equipment Supplier,Equipment - October 2024
+EXP-202410-027,Equipment,266.03,10/18/2024,Equipment Supplier,Equipment - October 2024
+EXP-202410-028,Packaging,643.81,10/15/2024,Packaging Co,Packaging - October 2024
+EXP-202410-029,Other,426.96,10/15/2024,Various,Other - October 2024
+EXP-202410-030,Other,432.89,10/09/2024,Various,Other - October 2024
+EXP-202410-031,Other,414.46,10/15/2024,Various,Other - October 2024

@@ -1,0 +1,32 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202212-001,Ingredient Costs,1449.52,12/24/2022,Flour Suppliers Inc,Ingredients - December 2022
+EXP-202212-002,Raw Materials,1064.86,12/01/2022,Bulk Foods Ltd,Ingredients - December 2022
+EXP-202212-003,Ingredient Costs,1259.38,12/23/2022,Sugar & Spice Co,Ingredients - December 2022
+EXP-202212-004,Ingredient Costs,1044.94,12/07/2022,Bulk Foods Ltd,Ingredients - December 2022
+EXP-202212-005,Raw Materials,1028.34,12/12/2022,Dairy Distributor,Ingredients - December 2022
+EXP-202212-006,Ingredients,986.65,12/05/2022,Sugar & Spice Co,Ingredients - December 2022
+EXP-202212-007,Ingredient Costs,1343.82,12/24/2022,Flour Suppliers Inc,Ingredients - December 2022
+EXP-202212-008,Raw Materials,1263.98,12/14/2022,Flour Suppliers Inc,Ingredients - December 2022
+EXP-202212-009,Ingredient Costs,1451.04,12/12/2022,Flour Suppliers Inc,Ingredients - December 2022
+EXP-202212-010,Ingredient Costs,1193.65,12/08/2022,Bulk Foods Ltd,Ingredients - December 2022
+EXP-202212-011,Ingredients,1363.3,12/09/2022,Flour Suppliers Inc,Ingredients - December 2022
+EXP-202212-012,Ingredients,1022.12,12/11/2022,Bulk Foods Ltd,Ingredients - December 2022
+EXP-202212-013,Ingredients,1048.91,12/15/2022,Dairy Distributor,Ingredients - December 2022
+EXP-202212-014,Ingredients,1378.94,12/10/2022,Bulk Foods Ltd,Ingredients - December 2022
+EXP-202212-015,Staff Costs,2838.87,12/25/2022,Payroll,Labor - December 2022
+EXP-202212-016,Staff Costs,2743.05,12/22/2022,Payroll,Labor - December 2022
+EXP-202212-017,Payroll,2730.7,12/20/2022,Payroll,Labor - December 2022
+EXP-202212-018,Staff Costs,3197.56,12/05/2022,Payroll,Labor - December 2022
+EXP-202212-019,Rent & Utilities,5000.0,12/02/2022,Property Management,Rent & Utilities - December 2022
+EXP-202212-020,Rent & Utilities,2500.0,12/16/2022,Property Management,Rent & Utilities - December 2022
+EXP-202212-021,Marketing,541.47,12/02/2022,Digital Ads Co,Marketing - December 2022
+EXP-202212-022,Marketing & Advertising,588.82,12/03/2022,Social Media Agency,Marketing - December 2022
+EXP-202212-023,Marketing & Advertising,439.51,12/18/2022,Social Media Agency,Marketing - December 2022
+EXP-202212-024,Equipment,200.6,12/11/2022,Equipment Supplier,Equipment - December 2022
+EXP-202212-025,Equipment,222.04,12/08/2022,Equipment Supplier,Equipment - December 2022
+EXP-202212-026,Packaging,177.11,12/14/2022,Packaging Co,Packaging - December 2022
+EXP-202212-027,Packaging,193.53,12/01/2022,Packaging Co,Packaging - December 2022
+EXP-202212-028,Packaging,195.21,12/10/2022,Packaging Co,Packaging - December 2022
+EXP-202212-029,Other,340.15,12/21/2022,Various,Other - December 2022
+EXP-202212-030,Other,351.95,12/22/2022,Various,Other - December 2022
+EXP-202212-031,Other,293.84,12/04/2022,Various,Other - December 2022

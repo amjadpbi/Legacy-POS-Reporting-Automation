@@ -1,0 +1,43 @@
+table DimExpCategory
+	lineageTag: 7ef431ee-8179-4707-9884-2d6aff501d8f
+
+	column ExpCategoryKey
+		dataType: int64
+		isHidden
+		formatString: 0
+		lineageTag: 216be524-c205-4417-9532-51f81521144e
+		summarizeBy: none
+		sourceColumn: ExpCategoryKey
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	column CategoryName
+		dataType: string
+		lineageTag: bb651815-a4b5-4158-8b76-cc7ef274430a
+		summarizeBy: none
+		sourceColumn: CategoryName
+
+		changedProperty = IsHidden
+
+		annotation SummarizationSetBy = Automatic
+
+	partition DimExpCategory = m
+		mode: import
+		queryGroup: '08_Dimension Tables'
+		source =
+				let
+				    Source = stgExpenses,
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"ExpenseID", "ExpenseAmount", "ExpenseDate", "VendorName", "Description"}),
+				    #"Removed Duplicates" = Table.Distinct(#"Removed Columns"),
+				    #"Added Index" = Table.AddIndexColumn(#"Removed Duplicates", "Index", 1, 1, Int64.Type),
+				    #"Reordered Columns" = Table.ReorderColumns(#"Added Index",{"Index", "CategoryName"}),
+				    #"Renamed Columns" = Table.RenameColumns(#"Reordered Columns",{{"Index", "ExpCategoryKey"}})
+				in
+				    #"Renamed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

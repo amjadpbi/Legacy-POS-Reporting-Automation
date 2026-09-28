@@ -1,0 +1,1242 @@
+table _Measures
+	lineageTag: 5825a39d-cc4f-4d09-b2dd-2581551019cd
+
+	measure 'Total Income' = SUM(FactSalesHeader[NetAmount])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: e2205443-520f-41c5-b97f-95f074559877
+
+	measure 'Total Expenses' =
+			
+			SUM(FactExpense[ExpenseAmount])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: 96039ba4-2165-41ca-a428-9481f40cbe24
+
+	measure 'Net Profit' =
+			
+			[Total Income] - [Total Expenses]
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: bc5762d1-2d6b-4506-bdb2-3a2ca6724915
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Profit Margin %' =
+			
+			DIVIDE([Net Profit], [Total Income], 0)
+		formatString: #,0.0%;-#,0.0%;#,0.0%
+		displayFolder: BASE MEASURES
+		lineageTag: 5df7ecc4-c262-4e88-b3c3-45ae9c7eead7
+
+	measure 'Payments Received' =
+			
+			CALCULATE(
+			    SUM(FactPayment[PaymentAmount]),
+			    FactPayment[PaymentStatus] = "Received"
+			)
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: 995ecd0a-36a6-4ddc-ac91-3108d7da5269
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Payments Pending' = ```
+			
+			VAR Pending = CALCULATE(SUM(FactPayment[PaymentAmount]), FactPayment[PaymentStatus] = "Pending")
+			RETURN Pending 
+			```
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: 2e94578c-58d4-4531-99b0-64cd6b19fed4
+
+	measure 'Collection Rate %' =
+			
+			DIVIDE([Payments Received], [Total Income], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: BASE MEASURES
+		lineageTag: 0e1de07d-32a6-448f-a1b9-cb349561ea48
+
+	measure 'Expense % of Total' =
+			
+			DIVIDE(
+			    [Total Expenses],
+			    CALCULATE([Total Expenses], REMOVEFILTERS(DimExpCategory)),
+			    0
+			)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: c875bdf3-5705-4cfc-b105-fad4b25b7551
+
+	measure 'Expense % of Revenue' = ```
+			
+			DIVIDE([Total Expenses], [Total Income], 0)
+			
+			```
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: d641de40-c502-443d-84da-7f31a45c8b5d
+
+	measure 'Payment Method % of Total' =
+			
+			DIVIDE(
+			    [Total Income],
+			    CALCULATE([Total Income], REMOVEFILTERS(DimPaymentMethod)),
+			    0
+			)
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: ecb54ac6-a793-4988-8444-f1fbb4ac159a
+
+		annotation PBI_FormatHint = {"isGeneralNumber":true}
+
+	measure 'Payment Fees Total' =
+			
+			SUM(FactPayment[FeeAmount])
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: 65540dbe-3df2-4806-b37c-fd2474a8bc19
+
+	measure 'Payment Fees % of Revenue' =
+			
+			DIVIDE([Payment Fees Total], [Total Income], 0)
+		formatString: 0.00%;-0.00%;0.00%
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: 20b9b485-c662-4685-8014-cdc871c5200c
+
+	measure 'Cash Flow' =
+			
+			[Total Income] - [Total Expenses]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BASE MEASURES
+		lineageTag: 2a928617-82b9-48c2-98a9-b26705ad67e2
+
+	measure 'MoM Revenue' =
+			
+			VAR MAXDATE = MAX(FactSalesHeader[OrderDate])           -- Last sale date
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1                 -- Start of current month
+			VAR END_CURR = MAXDATE                                  -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1                 -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                    -- End of previous month
+			
+			-- Current Month Revenue
+			VAR CURR_MONTH =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Revenue
+			VAR PREV_MONTH =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- Absolute change
+			VAR _change = CURR_MONTH - PREV_MONTH
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PREV_MONTH, 0)
+			
+			-- Formatted output
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PREV_MONTH),
+			        "No previous month data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " MoM)",
+			            UNICHAR(129031) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " MoM)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 9e327498-1294-4b25-b75a-85d93a299f14
+
+	measure 'YoY Revenue' =
+			
+			VAR LASTSALE = MAX(FactSalesHeader[OrderDate])          -- Last actual sale date
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD (from Jan 1 to last sale date)
+			VAR CY_YTD =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD (same period last year)
+			VAR PY_YTD =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Absolute change YoY
+			VAR _change = CY_YTD - PY_YTD
+			
+			-- Percent change YoY
+			VAR _pctchange = DIVIDE(_change, PY_YTD, 0)
+			
+			-- Formatted text for arrows, % and absolute change
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PY_YTD),
+			        "No previous year data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " YoY)",
+			            UNICHAR(129031) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " YoY)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 6fa86bf4-8298-473c-ae8d-b1e67d4745e4
+
+	measure 'MoM Revenue Color' =
+			
+			VAR MAXDATE = MAX(FactSalesHeader[OrderDate])           -- Last sale date
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1                 -- Start of current month
+			VAR END_CURR = MAXDATE                                  -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1                 -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                    -- End of previous month
+			
+			-- Current Month Revenue
+			VAR CURR_MONTH =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Revenue
+			VAR PREV_MONTH =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- MoM percent change
+			VAR _pctchange = DIVIDE(CURR_MONTH - PREV_MONTH, PREV_MONTH, 0)
+			
+			-- Assign color
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PREV_MONTH), "#808080",      -- Gray if no previous month data
+			    _pctchange > 0, "#008000",           -- Green if positive growth
+			    _pctchange < 0, "#FF0000",           -- Red if decline
+			    "#000000"                             -- Black if zero change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: d396af88-8ebd-40b3-b9c4-23305662bde9
+
+	measure 'CF Bars' =
+			
+			VAR _table =
+			    SUMMARIZE(
+			        ALLSELECTED('DimDate'),
+			        'DimDate'[MonthShort],
+			        "IncomeValue", [Total Income]
+			    )
+			VAR _maxval = MAXX(_table, [IncomeValue])
+			VAR _minval = MINX(_table, [IncomeValue])
+			VAR _currval = [Total Income]
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    _currval = _maxval, "Green",
+			    _currval = _minval, "Red",
+			    "Light Grey"
+			)
+		displayFolder: TIMESERIES
+		lineageTag: dbcbcab0-2b3c-4479-a622-61a7db1ebe37
+
+	measure 'CF Bars Expense' =
+			
+			VAR _table =
+			    SUMMARIZE(
+			        ALLSELECTED('DimDate'),
+			        'DimDate'[MonthShort],
+			        "ExpenseValue", [Total Expenses]
+			    )
+			VAR _maxval = MAXX(_table, [ExpenseValue])
+			VAR _minval = MINX(_table, [ExpenseValue])
+			VAR _currval = [Total Expenses]   -- Use Expenses, not Income
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    _currval = _maxval, "Red",         -- Max Expense → Red
+			    _currval = _minval, "Green",       -- Min Expense → Green
+			    "Light Grey"
+			)
+		displayFolder: TIMESERIES
+		lineageTag: c175b337-02fe-4253-ad1f-035553a175ca
+
+	measure 'MoM Expenses' =
+			
+			VAR MAXDATE = MAX(FactExpense[ExpenseDate])           -- Last expense date
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1               -- Start of current month
+			VAR END_CURR = MAXDATE                                -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1               -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                  -- End of previous month
+			
+			-- Current Month Expenses
+			VAR CURR_MONTH =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Expenses
+			VAR PREV_MONTH =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- Absolute change
+			VAR _change = CURR_MONTH - PREV_MONTH
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PREV_MONTH, 0)
+			
+			-- Formatted output
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PREV_MONTH),
+			        "No previous month data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129031) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "-$#,###;+$#,###") & " MoM)",  -- Up arrow for increase in Expense
+			            UNICHAR(129029) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "-$#,###;+$#,###") & " MoM)"   -- Down arrow for decrease
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: fc4357fd-9f35-4ef1-b15e-bc02e0874f71
+
+	measure 'YoY Expenses' =
+			
+			VAR LASTSALE = MAX(FactExpense[ExpenseDate])          -- Last actual expense date
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD Expenses (Jan 1 to last expense date)
+			VAR CY_YTD =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD Expenses (same period last year)
+			VAR PY_YTD =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Absolute change YoY
+			VAR _change = CY_YTD - PY_YTD
+			
+			-- Percent change YoY
+			VAR _pctchange = DIVIDE(_change, PY_YTD, 0)
+			
+			-- Formatted output with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PY_YTD),
+			        "No previous year data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129031) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "-$#,###;+$#,###") & " YoY)",   -- Up arrow for decrease = good
+			            UNICHAR(129029) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "-$#,###;+$#,###") & " YoY)"    -- Down arrow for increase = bad
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 2ad164cc-d722-406b-8944-9b481809739d
+
+	measure 'MoM Cash Flow' =
+			
+			VAR MAXDATE = MAX(FactSalesHeader[OrderDate])           -- Last sale date (also used for Cash Flow)
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1                 -- Start of current month
+			VAR END_CURR = MAXDATE                                  -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1                 -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                    -- End of previous month
+			
+			-- Current Month Cash Flow
+			VAR CURR_MONTH =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Cash Flow
+			VAR PREV_MONTH =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- Absolute change
+			VAR _change = CURR_MONTH - PREV_MONTH
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PREV_MONTH, 0)
+			
+			-- Formatted output
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PREV_MONTH),
+			        "No previous month data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " MoM)",  -- Positive CF growth
+			            UNICHAR(129031) & FORMAT(_pctchange, "0.0%") & " (" & FORMAT(_change, "+$#,###;-$#,###") & " MoM)"   -- Negative CF growth
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 80d642b8-b27a-4cd6-9b7c-f510cf9e61a8
+
+	measure 'YoY Cash Flow' = ```
+			
+			VAR LASTSALE = MAX(FactSalesHeader[OrderDate])         -- Last actual date
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD Cash Flow
+			VAR CY_YTD =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD Cash Flow
+			VAR PY_YTD =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Absolute change
+			VAR _change = CY_YTD - PY_YTD
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PY_YTD, 0)
+			
+			-- Formatted text with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PY_YTD),
+			        "No previous year data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & " " & FORMAT(_pctchange, "0.0%") &
+			            " (" & FORMAT(_change, "+$#,###;-$#,###") & " YoY)",
+			            UNICHAR(129031) & " " & FORMAT(_pctchange, "0.0%") &
+			            " (" & FORMAT(_change, "+$#,###;-$#,###") & " YoY)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+			
+			```
+		displayFolder: TIMESERIES
+		lineageTag: e3901360-99df-4188-bdbd-59e0cfff1712
+
+	measure 'YoY Revenue Color' =
+			
+			VAR LASTSALE = MAX(FactSalesHeader[OrderDate])
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD
+			VAR CY_YTD =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD
+			VAR PY_YTD =
+			    CALCULATE(
+			        SUM(FactSalesHeader[NetAmount]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Percent Change
+			VAR _pctchange = DIVIDE(CY_YTD - PY_YTD, PY_YTD, 0)
+			
+			-- Assign color based on value
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PY_YTD), "#808080",         -- Gray if no previous data
+			    _pctchange > 0, "#008000",           -- Green if growth
+			    _pctchange < 0, "#FF0000",           -- Red if negative
+			    "#000000"                             -- Black if zero change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: c7aac78e-14dc-40d2-925a-b46656d0c3cf
+
+	measure 'YoY Expense Color' =
+			
+			VAR LASTSALE = MAX(FactExpense[ExpenseDate])
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD
+			VAR CY_YTD =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseDate]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD
+			VAR PY_YTD =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseDate]),
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Percent Change
+			VAR _pctchange = DIVIDE(CY_YTD - PY_YTD, PY_YTD, 0)
+			
+			-- Assign color based on value
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PY_YTD), "#808080",         -- Gray if no previous data
+			    _pctchange > 0, "#008000",           -- Green if growth
+			    _pctchange < 0, "#FF0000",           -- Red if negative
+			    "#000000"                             -- Black if zero change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: b3c2b3a1-7f80-4ad2-b43a-c8fabf1eab09
+
+	measure 'YoY Cash Flow Color' =
+			
+			VAR LASTSALE = MAX(FactSalesHeader[OrderDate])
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD Cash Flow
+			VAR CY_YTD =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(CURR_YEAR, 1, 1),
+			            LASTSALE
+			        )
+			    )
+			
+			-- Previous Year YTD Cash Flow
+			VAR PY_YTD =
+			    CALCULATE(
+			        [Total Income] - [Total Expenses],
+			        DATESBETWEEN(
+			            'DimDate'[Date],
+			            DATE(PREV_YEAR, 1, 1),
+			            DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE))
+			        )
+			    )
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(CY_YTD - PY_YTD, PY_YTD, 0)
+			
+			-- Assign color
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PY_YTD), "#808080",     -- Gray if no previous data
+			    _pctchange > 0, "#008000",      -- Green if positive cash flow growth
+			    _pctchange < 0, "#FF0000",      -- Red if decline
+			    "#000000"                        -- Black if no change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: 6ebd6aaa-065b-47f2-861d-f6b3cfe6fe49
+
+	measure 'MoM Profit Margin %' =
+			
+			VAR MAXDATE = MAX(FactSalesHeader[OrderDate])           -- Last sale date
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1                 -- Start of current month
+			VAR END_CURR = MAXDATE                                  -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1                 -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                    -- End of previous month
+			
+			-- Current Month Profit Margin
+			VAR CURR_PM =
+			    CALCULATE(
+			        DIVIDE([Net Profit], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Profit Margin
+			VAR PREV_PM =
+			    CALCULATE(
+			        DIVIDE([Net Profit], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- Absolute change
+			VAR _change = CURR_PM - PREV_PM
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PREV_PM, 0)
+			
+			-- Formatted output with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PREV_PM),
+			        "No previous month data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & " " & FORMAT(CURR_PM, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " MoM)",
+			            UNICHAR(129031) & " " & FORMAT(CURR_PM, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " MoM)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 495b408f-217d-4b95-8657-0b511f69aed4
+
+	measure 'YoY Profit Margin %' =
+			
+			VAR LASTSALE = MAX(FactSalesHeader[OrderDate])
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD Profit Margin
+			VAR CY_PM =
+			    CALCULATE(
+			        DIVIDE([Net Profit], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], DATE(CURR_YEAR, 1, 1), LASTSALE)
+			    )
+			
+			-- Previous Year YTD Profit Margin
+			VAR PY_PM =
+			    CALCULATE(
+			        DIVIDE([Net Profit], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], DATE(PREV_YEAR, 1, 1), DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE)))
+			    )
+			
+			-- Absolute change
+			VAR _change = CY_PM - PY_PM
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PY_PM, 0)
+			
+			-- Formatted output with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PY_PM),
+			        "No previous year data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & " " & FORMAT(CY_PM, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " YoY)",
+			            UNICHAR(129031) & " " & FORMAT(CY_PM, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " YoY)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: c237fc27-6447-4199-b544-7167cc30555b
+
+	measure 'MoM Collection Rate %' =
+			
+			VAR MAXDATE = MAX(FactPayment[PaymentDate])           -- Last payment date
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1               -- Start of current month
+			VAR END_CURR = MAXDATE                                -- End of current month
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1               -- Start of previous month
+			VAR END_PREV = EOMONTH(MAXDATE, -1)                  -- End of previous month
+			
+			-- Current Month Collection Rate
+			VAR CURR_RATE =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Collection Rate
+			VAR PREV_RATE =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			-- Absolute change
+			VAR _change = CURR_RATE - PREV_RATE
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PREV_RATE, 0)
+			
+			-- Formatted output with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PREV_RATE),
+			        "No previous month data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & " " & FORMAT(CURR_RATE, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " MoM)",
+			            UNICHAR(129031) & " " & FORMAT(CURR_RATE, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " MoM)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 56a0802d-8f6f-4c30-8de8-5f4148a3861d
+
+	measure 'YoY Collection Rate %' =
+			
+			VAR LASTSALE = MAX(FactPayment[PaymentDate])        -- Last payment date
+			VAR CURR_YEAR = YEAR(LASTSALE)
+			VAR PREV_YEAR = CURR_YEAR - 1
+			
+			-- Current Year YTD Collection Rate
+			VAR CY_RATE =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], DATE(CURR_YEAR, 1, 1), LASTSALE)
+			    )
+			
+			-- Previous Year YTD Collection Rate
+			VAR PY_RATE =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], DATE(PREV_YEAR, 1, 1), DATE(PREV_YEAR, MONTH(LASTSALE), DAY(LASTSALE)))
+			    )
+			
+			-- Absolute change
+			VAR _change = CY_RATE - PY_RATE
+			
+			-- Percent change
+			VAR _pctchange = DIVIDE(_change, PY_RATE, 0)
+			
+			-- Formatted output with arrows
+			VAR _Condition =
+			    IF(
+			        ISBLANK(PY_RATE),
+			        "No previous year data",
+			        IF(
+			            _pctchange > 0,
+			            UNICHAR(129029) & " " & FORMAT(CY_RATE, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " YoY)",
+			            UNICHAR(129031) & " " & FORMAT(CY_RATE, "0.0%") &
+			            " (" & FORMAT(_pctchange, "0.0%") & " YoY)"
+			        )
+			    )
+			
+			RETURN
+			    _Condition
+		displayFolder: TIMESERIES
+		lineageTag: 77b5875b-7cfc-432f-95ce-d50fe8e6a957
+
+	measure 'MoM Collection Rate Color' =
+			
+			VAR MAXDATE = MAX(FactPayment[PaymentDate])
+			VAR ST_CURR = EOMONTH(MAXDATE, -1) + 1
+			VAR END_CURR = MAXDATE
+			VAR ST_PREV = EOMONTH(MAXDATE, -2) + 1
+			VAR END_PREV = EOMONTH(MAXDATE, -1)
+			
+			-- Current Month Collection Rate
+			VAR CURR =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous Month Collection Rate
+			VAR PREV =
+			    CALCULATE(
+			        DIVIDE([Payments Received], [Total Income], 0),
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			VAR _pctchange = DIVIDE(CURR - PREV, PREV, 0)
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PREV), "#808080",       -- No previous data
+			    _pctchange > 0, "#008000",      -- Improved
+			    _pctchange < 0, "#FF0000",      -- Declined
+			    "#000000"                       -- No change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: 46ed3faf-01a4-46b6-852e-2a770da234a7
+
+	measure 'Color YTD Collection Rate' =
+			
+			VAR MaxDate =
+			    MAX ( FactPayment[PaymentDate] )
+			VAR CY =
+			    YEAR ( MaxDate )
+			VAR PY =
+			    CY - 1
+			VAR CURR =
+			    CALCULATE (
+			        DIVIDE ( [Payments Received], [Total Income], 0 ),
+			        DATESBETWEEN ( 'DimDate'[Date], DATE ( CY, 1, 1 ), MaxDate )
+			    )
+			VAR PREV =
+			    CALCULATE (
+			        DIVIDE ( [Payments Received], [Total Income], 0 ),
+			        DATESBETWEEN (
+			            'DimDate'[Date],
+			            DATE ( PY, 1, 1 ),
+			            DATE ( PY, MONTH ( MaxDate ), DAY ( MaxDate ) )
+			        )
+			    )
+			VAR _pctchange =
+			    DIVIDE ( CURR - PREV, PREV, 0 )
+			RETURN
+			    SWITCH (
+			        TRUE (),
+			        ISBLANK ( PREV ), "#808080",
+			        _pctchange > 0, "#008000",
+			        _pctchange < 0, "#FF0000",
+			        "#000000"
+			    )
+		displayFolder: TIMESERIES
+		lineageTag: 6a75fd97-ff19-489c-bf3e-c1d513d403b8
+
+	measure 'MoM Expense Color' =
+			
+			VAR LASTEXP = MAX(FactExpense[ExpenseDate])
+			
+			-- Current Month Start & End
+			VAR CM_START = DATE(YEAR(LASTEXP), MONTH(LASTEXP), 1)
+			VAR CM_END   = LASTEXP
+			
+			-- Previous Month Start & End
+			VAR PM_START = DATE(YEAR(LASTEXP), MONTH(LASTEXP) - 1, 1)
+			VAR PM_END   = EOMONTH(LASTEXP, -1)
+			
+			-- Current Month Expense
+			VAR CM =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN('DimDate'[Date], CM_START, CM_END)
+			    )
+			
+			-- Previous Month Expense
+			VAR PM =
+			    CALCULATE(
+			        SUM(FactExpense[ExpenseAmount]),
+			        DATESBETWEEN('DimDate'[Date], PM_START, PM_END)
+			    )
+			
+			-- Percent Change
+			VAR _pctchange = DIVIDE(CM - PM, PM, 0)
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PM), "#808080",     -- Gray if no previous month
+			    _pctchange > 0, "#008000",  -- Green if increased
+			    _pctchange < 0, "#FF0000",  -- Red if decreased
+			    "#000000"                   -- Black if no change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: a6a54a94-31b9-4ba3-b1b8-f1ade195aa5a
+
+	measure 'Previous Year Revenue' =
+			
+			VAR LASTSALE =
+			    MAX(FactSalesHeader[OrderDate])
+			
+			VAR CURR_YEAR =
+			    YEAR(LASTSALE)
+			
+			VAR PREV_YEAR =
+			    CURR_YEAR - 1
+			
+			VAR PREV_START =
+			    DATE(PREV_YEAR, 1, 1)
+			
+			VAR PREV_END =
+			    DATE(PREV_YEAR, 12, 31)
+			
+			RETURN
+			CALCULATE(
+			    SUM(FactSalesHeader[NetAmount]),
+			    DATESBETWEEN(
+			        'DimDate'[Date],
+			        PREV_START,
+			        PREV_END
+			    )
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: TIMESERIES
+		lineageTag: 8d96c6fa-651b-48f2-a31e-9b1eacd847a2
+
+	measure 'Waterfall - Expected' = [Total Income]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: b303fade-30ed-4807-a5ae-5786e792ae61
+
+	measure 'Waterfall - Received' = [Payments Received]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: 4be73174-b1c1-4aa9-8a37-656ff97b2d17
+
+	measure 'Waterfall - Pending' = -[Payments Pending]
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: bcea094a-964b-4491-874d-233994aea776
+
+	measure 'Payments Failed' =
+			
+			VAR Failed = CALCULATE(SUM(FactPayment[PaymentAmount]), FactPayment[PaymentStatus] = "Failed")
+			RETURN
+			Failed
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: TIMESERIES
+		lineageTag: 5f2fefef-7f5c-4f03-9d4a-0fd58c212f13
+
+	measure 'MoM Cash Flow Color' =
+			
+			VAR MaxDate =
+			    MAX('DimDate'[Date])
+			
+			-- Current month boundaries
+			VAR ST_CURR = EOMONTH(MaxDate, -1) + 1
+			VAR END_CURR = MaxDate
+			
+			-- Previous month boundaries
+			VAR ST_PREV = EOMONTH(MaxDate, -2) + 1
+			VAR END_PREV = EOMONTH(MaxDate, -1)
+			
+			-- Current month CF
+			VAR CF_CURR =
+			    CALCULATE(
+			        [Cash Flow],
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous month CF
+			VAR CF_PREV =
+			    CALCULATE(
+			        [Cash Flow],
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			VAR _pctchange = DIVIDE(CF_CURR - CF_PREV, CF_PREV, 0)
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(CF_PREV), "#808080",     -- No previous month
+			    _pctchange > 0, "#008000",       -- Green (increase)
+			    _pctchange < 0, "#FF0000",       -- Red (decline)
+			    "#000000"                        -- Black (no change)
+			)
+		displayFolder: TIMESERIES
+		lineageTag: ccfaf488-acfc-4182-bc16-1bff3b808faa
+
+	measure 'MoM Profit Color' =
+			
+			VAR MaxDate =
+			    MAX('DimDate'[Date])
+			
+			-- Current month boundaries
+			VAR ST_CURR = EOMONTH(MaxDate, -1) + 1
+			VAR END_CURR = MaxDate
+			
+			-- Previous month boundaries
+			VAR ST_PREV = EOMONTH(MaxDate, -2) + 1
+			VAR END_PREV = EOMONTH(MaxDate, -1)
+			
+			-- Current month profit
+			VAR PROF_CURR =
+			    CALCULATE(
+			        [Net Profit],
+			        DATESBETWEEN('DimDate'[Date], ST_CURR, END_CURR)
+			    )
+			
+			-- Previous month profit
+			VAR PROF_PREV =
+			    CALCULATE(
+			        [Net Profit],
+			        DATESBETWEEN('DimDate'[Date], ST_PREV, END_PREV)
+			    )
+			
+			VAR _pctchange = DIVIDE(PROF_CURR - PROF_PREV, PROF_PREV, 0)
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    ISBLANK(PROF_PREV), "#808080",   -- No previous month
+			    _pctchange > 0, "#008000",       -- Increase = green
+			    _pctchange < 0, "#FF0000",       -- Decrease = red
+			    "#000000"                        -- No change
+			)
+		displayFolder: TIMESERIES
+		lineageTag: a4d2c212-1fed-4913-be0c-46cfd67f52eb
+
+	measure 'Most Expensive Payment Method' =
+			
+			VAR MaxFeeMethod =
+			    TOPN(
+			        1,
+			        SUMMARIZE(
+			            FactPayment,
+			            DimPaymentMethod[PaymentMethod],
+			            "TotalFees", [Payment Fees Total]
+			        ),
+			        [TotalFees],
+			        DESC
+			    )
+			VAR MethodName =
+			    MAXX(MaxFeeMethod, DimPaymentMethod[PaymentMethod])
+			RETURN
+			    "Most Expensive Payment Method is: " & MethodName
+		displayFolder: BREAKDOWN MEASURES
+		lineageTag: 1f4c92f9-b5ea-4630-a85b-1a4bdaa30bc8
+
+	measure 'Payment Details - Avg Days Outstanding' = ```
+			
+			VAR FilteredPayments = 
+			    FILTER(
+			        FactPayment,
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"}
+			    )
+			RETURN
+			    AVERAGEX(
+			        FilteredPayments,
+			        DATEDIFF(FactPayment[PaymentDate], TODAY(), DAY)
+			    )
+			
+			```
+		formatString: #,0
+		displayFolder: DRILL-THROUGH
+		lineageTag: 86e98396-5d48-4103-b550-eceade2ccb63
+
+	measure 'Payment Details - Total Amount' =
+			
+			CALCULATE(
+			    SUM(FactPayment[PaymentAmount])
+			)
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: 0c8fb33a-8ab8-4ad9-a864-1c0c3bc829ad
+
+	measure 'Payment Details - Oldest Payment Days' = ```
+			
+			VAR FilteredPayments = 
+			    FILTER(
+			        FactPayment,
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"}
+			    )
+			RETURN
+			    MAXX(
+			        FilteredPayments,
+			        DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY)
+			    )
+			```
+		formatString: 0
+		displayFolder: DRILL-THROUGH
+		lineageTag: 3911bdcf-ea45-4b31-877b-506f1c5ebfea
+
+	measure 'Payment Details - Transaction Count' =
+			
+			COUNTROWS(FactPayment)
+		formatString: 0
+		displayFolder: DRILL-THROUGH
+		lineageTag: e1eac65c-e9b7-44d2-92b6-a2ebc3acb2c2
+
+	measure 'Payment Aging - 0-15 Days' =
+			
+			VAR Today = MAX(FactPayment[PaymentDate])
+			RETURN
+			    CALCULATE(
+			        SUM(FactPayment[PaymentAmount]),
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"},
+			        FILTER(
+			            FactPayment,
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) <= 15
+			        )
+			    )
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: 3ec90158-ebf2-4d18-af80-f8d627f11f17
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Payment Aging - 16-30 Days' =
+			
+			VAR Today = MAX(FactPayment[PaymentDate])
+			RETURN
+			    CALCULATE(
+			        SUM(FactPayment[PaymentAmount]),
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"},
+			        FILTER(
+			            FactPayment,
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) > 15 &&
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) <= 30
+			        )
+			    )
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: 5acf2f89-2afd-4dc6-9efb-a464eb71d6b9
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Payment Aging - 31-60 Days' = ```
+			
+			VAR Today = MAX(FactPayment[PaymentDate])
+			RETURN
+			    CALCULATE(
+			        SUM(FactPayment[PaymentAmount]),
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"},
+			        FILTER(
+			            FactPayment,
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) > 30 &&
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) <= 60
+			        )
+			    )
+			
+			```
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: bb5afe1c-d5f4-414b-b624-68b70beb6fe7
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Payment Aging - 60+ Days' =
+			
+			VAR Today = MAX(FactPayment[PaymentDate])
+			RETURN
+			    CALCULATE(
+			        SUM(FactPayment[PaymentAmount]),
+			        FactPayment[PaymentStatus] IN {"Pending", "Failed"},
+			        FILTER(
+			            FactPayment,
+			            DATEDIFF(FactPayment[PaymentDate], MAX(FactPayment[PaymentDate]), DAY) > 60
+			        )
+			    )
+		formatString: "Rs"#,0.###############;-"Rs"#,0.###############;"Rs"#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: 339222ab-5350-4ccd-9972-ae12eb861c5c
+
+		annotation PBI_FormatHint = {"currencyCulture":"en-PK"}
+
+	measure 'Payment Aging - Amount' =
+			
+			VAR SelectedBucket = SELECTEDVALUE('Payment Aging Categories'[AgingBucket])
+			RETURN
+			    SWITCH(
+			        SelectedBucket,
+			        "0-15 Days", [Payment Aging - 0-15 Days],
+			        "16-30 Days", [Payment Aging - 16-30 Days],
+			        "31-60 Days", [Payment Aging - 31-60 Days],
+			        "60+ Days", [Payment Aging - 60+ Days],
+			        BLANK()
+			    )
+		formatString: \$#,0.###############;(\$#,0.###############);\$#,0.###############
+		displayFolder: DRILL-THROUGH
+		lineageTag: 067af158-9b6e-47c7-93c4-590f337915e8
+
+	measure 'Location Color' = ```
+			
+			VAR _table =
+			    SUMMARIZE(
+			        ALLSELECTED('DimLocation'),
+			        'DimLocation'[Location],
+			        "RevenueValue", [Total Income]
+			    )
+			VAR _maxval = MAXX(_table, [RevenueValue])
+			VAR _minval = MINX(_table, [RevenueValue])
+			VAR _currval = [Total income]
+			
+			RETURN
+			SWITCH(
+			    TRUE(),
+			    _currval = _maxval, "Green",   -- Green (Best)
+			    _currval = _minval, "Red",   -- Red (Worst)
+			    "Light Grey"                        -- Grey (Others)
+			)
+			
+			```
+		displayFolder: Format
+		lineageTag: 192e7ef4-e16d-4891-b2ba-c084b8ddb56c
+
+	partition _Measures = m
+		mode: import
+		source =
+				let
+				    Source = Table.FromRows(Json.Document(Binary.Decompress(Binary.FromText("i44FAA==", BinaryEncoding.Base64), Compression.Deflate)), let _t = ((type nullable text) meta [Serialized.Text = true]) in type table [Column1 = _t]),
+				    #"Removed Columns" = Table.RemoveColumns(Source,{"Column1"})
+				in
+				    #"Removed Columns"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

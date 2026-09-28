@@ -1,0 +1,33 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202402-001,Ingredient Costs,899.83,02/05/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-002,Raw Materials,976.63,02/13/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-003,Ingredients,803.09,02/07/2024,Flour Suppliers Inc,Ingredients - February 2024
+EXP-202402-004,Ingredient Costs,801.64,02/24/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-005,Ingredient Costs,1149.9,02/09/2024,Flour Suppliers Inc,Ingredients - February 2024
+EXP-202402-006,Ingredients,950.12,02/26/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-007,Raw Materials,888.14,02/15/2024,Bulk Foods Ltd,Ingredients - February 2024
+EXP-202402-008,Ingredient Costs,830.94,02/05/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-009,Ingredients,940.77,02/06/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-010,Ingredients,837.25,02/10/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-011,Ingredient Costs,834.0,02/15/2024,Bulk Foods Ltd,Ingredients - February 2024
+EXP-202402-012,Ingredients,1108.97,02/12/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-013,Ingredient Costs,1137.58,02/09/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-014,Ingredient Costs,790.26,02/20/2024,Flour Suppliers Inc,Ingredients - February 2024
+EXP-202402-015,Raw Materials,1114.62,02/18/2024,Dairy Distributor,Ingredients - February 2024
+EXP-202402-016,Ingredient Costs,789.77,02/04/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-017,Ingredients,980.04,02/22/2024,Bulk Foods Ltd,Ingredients - February 2024
+EXP-202402-018,Ingredient Costs,1092.04,02/23/2024,Sugar & Spice Co,Ingredients - February 2024
+EXP-202402-019,Staff Costs,4520.88,02/09/2024,Payroll,Labor - February 2024
+EXP-202402-020,Staff Costs,4389.35,02/16/2024,Payroll,Labor - February 2024
+EXP-202402-021,Payroll,4476.08,02/21/2024,Payroll,Labor - February 2024
+EXP-202402-022,Rent & Utilities,5000.0,02/02/2024,Property Management,Rent & Utilities - February 2024
+EXP-202402-023,Marketing,453.21,02/16/2024,Digital Ads Co,Marketing - February 2024
+EXP-202402-024,Marketing,508.47,02/15/2024,Print Media Inc,Marketing - February 2024
+EXP-202402-025,Marketing,479.69,02/13/2024,Digital Ads Co,Marketing - February 2024
+EXP-202402-026,Marketing,518.09,02/25/2024,Print Media Inc,Marketing - February 2024
+EXP-202402-027,Equipment,344.93,02/20/2024,Equipment Supplier,Equipment - February 2024
+EXP-202402-028,Equipment,327.3,02/07/2024,Equipment Supplier,Equipment - February 2024
+EXP-202402-029,Packaging,311.09,02/20/2024,Packaging Co,Packaging - February 2024
+EXP-202402-030,Packaging,338.76,02/10/2024,Packaging Co,Packaging - February 2024
+EXP-202402-031,Other,515.72,02/10/2024,Various,Other - February 2024
+EXP-202402-032,Other,613.18,02/02/2024,Various,Other - February 2024

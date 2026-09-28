@@ -1,0 +1,27 @@
+ExpenseID,CategoryName,ExpenseAmount,ExpenseDate,VendorName,Description
+EXP-202206-001,Ingredients,1059.22,06/26/2022,Sugar & Spice Co,Ingredients - June 2022
+EXP-202206-002,Ingredient Costs,999.96,06/21/2022,Flour Suppliers Inc,Ingredients - June 2022
+EXP-202206-003,Ingredients,983.74,06/14/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-004,Ingredients,1102.55,06/21/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-005,Ingredients,1021.84,06/20/2022,Dairy Distributor,Ingredients - June 2022
+EXP-202206-006,Ingredients,1136.73,06/01/2022,Flour Suppliers Inc,Ingredients - June 2022
+EXP-202206-007,Ingredient Costs,868.31,06/01/2022,Dairy Distributor,Ingredients - June 2022
+EXP-202206-008,Raw Materials,1011.7,06/02/2022,Dairy Distributor,Ingredients - June 2022
+EXP-202206-009,Ingredients,1160.71,06/18/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-010,Ingredients,1159.0,06/25/2022,Sugar & Spice Co,Ingredients - June 2022
+EXP-202206-011,Raw Materials,1056.38,06/06/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-012,Ingredient Costs,907.55,06/05/2022,Dairy Distributor,Ingredients - June 2022
+EXP-202206-013,Ingredients,1145.45,06/17/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-014,Ingredients,1265.37,06/07/2022,Bulk Foods Ltd,Ingredients - June 2022
+EXP-202206-015,Labor,4205.16,06/19/2022,Payroll,Labor - June 2022
+EXP-202206-016,Labor,4170.57,06/23/2022,Payroll,Labor - June 2022
+EXP-202206-017,Payroll,4352.36,06/26/2022,Payroll,Labor - June 2022
+EXP-202206-018,Utilities,5000.0,06/02/2022,Utility Company,Rent & Utilities - June 2022
+EXP-202206-019,Marketing & Advertising,440.35,06/15/2022,Print Media Inc,Marketing - June 2022
+EXP-202206-020,Marketing & Advertising,598.23,06/19/2022,Social Media Agency,Marketing - June 2022
+EXP-202206-021,Marketing,448.07,06/11/2022,Digital Ads Co,Marketing - June 2022
+EXP-202206-022,Equipment,429.08,06/13/2022,Equipment Supplier,Equipment - June 2022
+EXP-202206-023,Packaging,156.05,06/07/2022,Packaging Co,Packaging - June 2022
+EXP-202206-024,Packaging,181.79,06/05/2022,Packaging Co,Packaging - June 2022
+EXP-202206-025,Packaging,164.36,06/24/2022,Packaging Co,Packaging - June 2022
+EXP-202206-026,Other,1098.79,06/14/2022,Various,Other - June 2022
