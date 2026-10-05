@@ -6,7 +6,7 @@ Power BI project built for a retail bakery franchise using a legacy POS system t
 
 ## Project background
 
-The case study behind this project is **Power BI Bakery Project Pipeline**. It shows a full end-to-end workflow:
+The project is based on a **Power BI Bakery Project Pipeline** scenario. It shows a full end-to-end workflow:
 
 1. ingestion folder
 2. dynamic folder path
@@ -15,7 +15,7 @@ The case study behind this project is **Power BI Bakery Project Pipeline**. It s
 5. data modeling
 6. dashboard
 
-The source files were inconsistent, duplicated, and difficult to use for reporting. The model was built to handle that kind of file drift while keeping the business layer clean.
+The simulated source files were inconsistent, duplicated, and difficult to use for reporting. The model was built to handle that kind of file drift while keeping the business layer clean.
 
 ## What this project does
 
